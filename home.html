@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - D'Voice</title>
+    <!-- Loads core -> utility -> components -> widgets -> states -> pages -->
+    <link rel="stylesheet" href="styles/index.css">
+</head>
+<body class="page-home">
+
+    <!-- Widgets self-register and attach to these hooks -->
+    <header data-widget="nav"></header>
+
+    <main class="container">
+        
+        <!-- 1. Search / Explore Entry (Static) -->
+        <section class="hero-search">
+            <h1>Find Academic Resources</h1>
+            <form data-action="search-resources">
+                <input type="search" name="q" placeholder="Search past questions, notes..." aria-label="Search resources">
+                <button type="submit">Search</button>
+            </form>
+        </section>
+
+        <!-- 2. Continue Reading (Signed-in only) -->
+        <section data-widget="continue-reading" hidden>
+            <h2>Continue Reading</h2>
+            <div data-state="loading">Loading recent items...</div>
+            <div data-state="empty" hidden>No recent reading history.</div>
+            <div data-state="error" hidden>Couldn't load history.</div>
+            <div data-state="data" hidden class="card-grid"></div>
+        </section>
+
+        <!-- 3. Faculty Suggestions (Signed-in + Faculty set only) -->
+        <section data-widget="faculty-suggestions" hidden>
+            <h2>For Your Faculty</h2>
+            <div data-state="loading">Loading suggestions...</div>
+            <div data-state="empty" hidden>No suggestions available.</div>
+            <div data-state="error" hidden>Couldn't load suggestions.</div>
+            <div data-state="data" hidden class="card-grid"></div>
+        </section>
+
+        <!-- 4. Recent Announcements -->
+        <section data-widget="recent-announcements">
+            <div class="section-header">
+                <h2>Recent Announcements</h2>
+                <a href="announcements.html">View all</a>
+            </div>
+            <div data-state="loading">Loading announcements...</div>
+            <div data-state="empty" hidden>No recent announcements.</div>
+            <div data-state="error" hidden>Couldn't load announcements.</div>
+            <div data-state="data" hidden class="list-stack"></div>
+        </section>
+
+        <!-- 5. Upcoming Exam Dates -->
+        <section data-widget="upcoming-dates">
+            <div class="section-header">
+                <h2>Upcoming Exam Dates</h2>
+                <a href="dates.html">View all</a>
+            </div>
+            <div data-state="loading">Loading dates...</div>
+            <div data-state="empty" hidden>No upcoming dates published.</div>
+            <div data-state="error" hidden>Couldn't load dates.</div>
+            <div data-state="data" hidden class="list-stack"></div>
+        </section>
+
+        <!-- 6. Browse Associations -->
+        <section data-widget="browse-associations">
+            <div class="section-header">
+                <h2>Browse Associations</h2>
+                <a href="associations.html">View all</a>
+            </div>
+            <div data-state="loading">Loading associations...</div>
+            <div data-state="empty" hidden>No associations found.</div>
+            <div data-state="error" hidden>Couldn't load associations.</div>
+            <div data-state="data" hidden class="card-grid"></div>
+        </section>
+
+        <!-- 7. Daily Quote (Optional, hidden by default) -->
+        <section data-widget="daily-quote" hidden>
+            <div data-state="data">
+                <blockquote>
+                    <p data-quote-text></p>
+                    <cite data-quote-author></cite>
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- 8. WhatsApp Invite (Optional, hidden by default) -->
+        <section data-widget="whatsapp-invite" hidden>
+            <div data-state="data">
+                <p data-invite-text></p>
+                <a data-invite-link href="#" target="_blank" rel="noopener">Join WhatsApp Community</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer data-widget="footer"></footer>
+
+    <!-- Orchestrator entry point -->
+    <script type="module" src="js/orchestrators/home.js"></script>
+</body>
+</html>
