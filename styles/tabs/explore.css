@@ -1,0 +1,15 @@
+.explore-search {
+  margin-bottom: var(--space-md);
+}
+
+.explore-echo {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: var(--space-sm) 0 var(--space-md);
+}
+
+@media (min-width: 768px) {
+  #tab-explore .card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}

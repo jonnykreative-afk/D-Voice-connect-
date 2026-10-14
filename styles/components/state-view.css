@@ -1,0 +1,54 @@
+.sv__state[hidden] { display: none !important; }
+
+.sv__empty {
+  padding: 32px 16px;
+  text-align: center;
+  color: var(--text-muted);
+}
+.sv__empty i {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* =========================================
+   SKELETONS
+   ========================================= */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--surface-alt) 25%,
+    var(--border) 50%,
+    var(--surface-alt) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.sv__skeleton-card { height: 120px; }
+.sv__skeleton-line { height: 56px; margin-bottom: 8px; }
+
+.sv__skeleton-row,
+.sv__skeleton-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.sv__skeleton-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.sv__empty-hint {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-top: 6px;
+}
