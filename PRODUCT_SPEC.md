@@ -1,136 +1,174 @@
 # D'Voice — Product Specification (MVP)
 
-**Purpose:** Define the required user-facing behaviour and boundaries for the first release. Detailed implementation choices belong in the system design and code, not in this document.
+This document describes required product behaviour. It is a product guide, not a technical architecture specification or a pixel-perfect design.
 
 ## 1. Product boundary
-D'Voice is a student utility platform initially serving FUTA. The MVP is a **single-institution application**, not a multi-tenant product. Do not implement tenant switching, institution-level data isolation, or cross-institution content sharing. Keep ordinary configuration and reusable code where useful, without building speculative expansion infrastructure.
+D'Voice initially serves FUTA only. Build a single-institution application. Do not implement tenant switching, institution-level tenant isolation, or cross-institution content ownership. Keep code reasonably modular without engineering for hypothetical deployments.
 
-## 2. Roles and permissions
+Academic utility is the primary purpose. The product must remain useful even if the founder loses an election or a student has no interest in politics.
+
+## 2. Roles
 ### Visitor
-Can browse publicly available resources, search, view public news and association information, read About/Founder/Contact pages, and see the optional WhatsApp community invitation. Authentication should only be required for actions that genuinely need a personal account.
+Can browse publicly available resources, search, view public announcements and association information, read About/Founder/Contact pages, and see the optional WhatsApp invitation. Registration is required only for actions that need a personal account.
 
 ### Student
-Can use the dashboard, search permitted resources, open available PDFs, save resources, revisit recent reading, and view relevant campus information. Personalisation may prioritise faculty-relevant content but must not unnecessarily hide other available resources.
+Can use the student experience, search permitted resources, open available PDFs, save resources, revisit recent reading, and view campus information. Personalisation is based on the student's **faculty only** for the MVP. Personalisation may prioritise relevant material but must not unnecessarily hide other available resources.
 
 ### Administrator
-Can create, edit, publish/unpublish, and remove supported content through a separate management interface. The backend must enforce permissions; hiding controls in the frontend is not security.
+Can create, edit, publish/unpublish, and remove supported content through a separate admin experience. Administrators are responsible for publishing announcements. Backend authorisation must protect all administrative actions; hiding a UI control is not security.
 
-## 3. Public information architecture
-- Public Home
-- Explore/resources
-- Resource details and PDF access
-- News and announcement details
-- Association directory and details
+## 3. Page and navigation inventory
+This is the initial page inventory for UI planning. The designer may recommend combining closely related screens, but must not omit a core user journey without explaining why.
+
+### Public pages
+- Public Home / landing page
+- Explore Resources
+- Resource Details / PDF access
+- Announcements list and announcement details (can be one page plus a detail view)
+- Associations directory and association details (can be one page plus a detail view)
 - About D'Voice
 - Meet the Founder
 - Contact
-- Sign in/register
+- Sign in / Register (only as required by agreed account flows)
 
-Keep the founder page accessible, but do not make it dominate the academic experience.
+### Student pages
+- Student Home / dashboard
+- Explore Resources (may share the public resource interface with authenticated state)
+- Resource Details / PDF access
+- Reading: Recent and Saved
+- Profile and basic preferences
+- Announcement details and association details may reuse public page templates
 
-## 4. Student dashboard
-Primary navigation: **Home, Explore, Reading, Profile**.
+### Admin pages (design after student/public flows)
+- Admin overview, if it provides useful operational value
+- Resource management: list, add, edit, publish/unpublish, remove
+- Announcement management: list, create, edit, publish/unpublish, remove
+- Association management
+- Examination-date management
+- Quote management
+- Founder-page editor
+- WhatsApp invitation editor
+- Basic platform/contact information
 
-### Home
-Purpose: a compact overview, not a complete catalogue. Potential sections, ordered by usefulness and content availability:
+Avoid creating a separate page for every small action if a well-designed list/detail/form flow is clearer.
+
+## 4. Student navigation and Home
+Suggested primary student navigation: **Home, Explore, Reading, Profile**.
+
+Home is an overview, not the complete catalogue. Use only sections supported by available content. Suggested order:
 1. Continue Reading (only when history exists)
-2. Recommended academic resources
-3. News and Updates
-4. Faculty/resource discovery
+2. Recommended / faculty-relevant resources
+3. Announcements and Updates
+4. Browse or discover resources
 5. Student associations
-6. Upcoming examination information (only with a valid date)
-7. Daily Quote (only with configured content)
-8. D'Voice community invitation
+6. Upcoming examination dates (only when valid dates exist)
+7. Daily Quote (only when configured)
+8. Optional D'Voice community invitation
 
-The page must remain useful when some sections have no content. Avoid oversized or decorative empty sections.
+The community invitation must not overwhelm the academic content. The founder page should be discoverable but should not dominate the student dashboard.
 
-### Explore
-- Search by available metadata such as title, course code/title, topic, faculty, or department.
-- Support useful filters such as faculty and resource type where the metadata exists.
-- Show clear active filters and allow individual removal/reset.
-- Use pagination or deliberate incremental loading rather than downloading the entire catalogue.
-- Distinguish loading, no content, no matching results, and request failure.
+## 5. Academic resources and PDF metadata
+Most resources are expected to be PDFs. The UI should make it easy to identify a resource, understand whether it is relevant, and open the file.
+
+### Proposed resource fields
+Use these as a starting model, not a requirement to display every field on every card:
+- **Required for a published resource:** title, PDF/file reference, publication status.
+- **Useful when applicable:** course code, course title, faculty, department, level, semester/session, resource category/type, short description, academic year/date, tags, source/uploader, and upload date.
+- **Optional:** thumbnail/cover image if available; do not require one for a PDF.
+
+For MVP personalisation, faculty is the only confirmed student profile attribute. Resource faculty/department/course metadata may be absent or inapplicable for some materials, so the UI must tolerate missing optional fields.
+
+The product owner should confirm the minimum metadata needed for accurate discovery. The UI designer decides how to present that metadata (card, detail page, filter, or secondary information) and should avoid making irrelevant fields visually prominent. The resource upload form should not force fields that do not apply to the material.
+
+### Explore/search
+- Search by title and available fields such as course code/title, topic, faculty, department, or tags.
+- Offer only filters supported by real metadata. Faculty and resource type are likely useful starting filters.
+- Show active filters and allow clearing them.
+- Use pagination or incremental loading; do not require downloading the whole catalogue.
+- Distinguish loading, genuinely empty catalogue, no matching results, and request failure.
 
 ### Resource details and PDF access
-Show available identifying metadata and a clear action to open the file. Prefer native browser PDF viewing for the MVP. Handle missing/unavailable files clearly and provide a way back. Do not claim that a file opened successfully based only on a button click.
+- Present the title and available metadata clearly, with a primary action to open the PDF.
+- Prefer native browser PDF viewing for the MVP; do not design a custom reader unless there is a demonstrated need.
+- Handle missing, removed, or unavailable files with a clear message and recovery path.
+- Do not claim a file opened successfully based solely on the user pressing the button.
 
 ### Reading
-Provide Recent and Saved views. Reading history may back the recent list; do not duplicate data without a reason. Saving/removing a saved resource must have predictable behaviour and require authentication where tied to a student account.
+Provide Recent and Saved views. Reading history can back Recent; do not duplicate stored data without a reason. Saving and removing saved resources must behave predictably and require authentication when associated with a student account.
 
-### Profile
-Keep account details and basic preferences simple. Do not collect profile data without a defined use.
+## 6. Announcements, dates, quotes, and associations
+- **Announcements:** Administrators create and publish them. Show title, summary, date, and source/authority where relevant. Distinguish official announcements from general news. Do not add a student publishing flow for announcements in the MVP.
+- **Examination dates:** Display only dates supplied and maintained by an authorised administrator. Handle missing dates honestly.
+- **Daily quote:** Show only configured content, with accurate attribution when available. Do not fabricate a quote to fill space.
+- **Associations:** Explain what each association does and show available contact or membership information. Indigenous groups are deferred until the list and use case are provided.
 
-## 5. News, dates, quotes, and associations
-- News/announcements show a headline, summary, date, source/authority where relevant, and a details action.
-- Clearly distinguish official announcements from general or unverified news.
-- Examination information must use real configured dates; hide or explain the absence of dates rather than inventing one.
-- Quotes must have accurate attribution where available; do not fabricate content to fill a slot.
-- Association listings should explain each association's purpose and show available contact or membership information.
+## 7. Personalisation and profile
+Collect only what is needed. For MVP personalisation, use the student's faculty. Do not block access to other resources based on faculty. Do not include indigenous-group selection until the required list is available and its purpose is confirmed. Keep profile and preferences simple.
 
-## 6. Meet the Founder
-This is a public-facing page introducing the person who initiated D'Voice. It should support the project's continuity beyond any election or political outcome.
+## 8. Meet the Founder
+Create a public page introducing the person who initiated D'Voice. Its purpose is to explain who started the project, why, and what they hope it will contribute. The page should remain appropriate if the founder's political circumstances change.
 
-Suggested content fields:
+Suggested editable fields:
 - Display name
 - Portrait/photo (optional)
 - Short introduction
 - Motivation for starting D'Voice
 - Vision for the project
-- Relevant background/experience (only verified information)
+- Relevant background/experience (verified only)
 - Founder message
 - Optional public links/contact details
 - Visibility/published state
 
-The page should explain the founder's relationship to the project without implying that D'Voice is officially endorsed by FUTA or another body unless that endorsement is confirmed. Personal or political messaging must remain distinguishable from academic resources and official institutional information.
+Initial design may use clearly marked placeholder content. Do not invent credentials or imply FUTA endorsement unless confirmed.
 
 ### Administrator control
-Authorised administrators must be able to edit every displayed founder-page field, replace/remove the image, change links, and publish/unpublish the page without editing source code or redeploying the application. Validate input and restrict editing to authorised administrators. Keep the founder's editable content in data/configuration, not hardcoded into the page.
+An authorised administrator must be able to edit every displayed field, add/replace/remove the image, update links, and publish/unpublish the page without changing source code or redeploying the app. Keep editable content in data/configuration, not hardcoded into the page. Validate input and enforce permission on the backend.
 
-## 7. WhatsApp community invitation
-Provide a clear, optional section or call-to-action on the public site and/or student Home. Its copy must give students a genuine reason to join, such as receiving relevant D'Voice updates, discovering useful student opportunities, or participating in a well-moderated student community—**but only promise benefits the group actually provides**.
+## 9. WhatsApp community invitation
+Design an optional, clear invitation explaining a genuine reason a student might join. For UI design, use this **provisional concept**: a community for relevant D'Voice updates, useful student opportunities, academic discussion/quizzes, and connecting motivated students. This is not a confirmed service commitment; before launch, the founder must confirm which activities will actually be maintained and how the group will be moderated.
 
 Requirements:
-- Explain what the group is for before asking users to join.
-- Include a clear Join WhatsApp Community action linking to the current approved invite URL.
-- State that joining is optional and is not required to use D'Voice.
-- Do not imply that membership is required for academic resources or privileged platform access.
-- Make the invitation text, destination URL, and visibility editable by an authorised administrator.
-- If the invite URL is missing or expired, hide the broken action or show a clear fallback; never invent a link.
-- Avoid repeated intrusive prompts or obstructing core tasks.
+- Explain the value before showing the Join WhatsApp Community action.
+- Joining is optional and never required to access resources or use D'Voice.
+- Make invitation text, approved invite URL, and visibility editable by an authorised administrator.
+- If the link is missing or expired, do not show a broken action or invent a link.
+- Do not use intrusive prompts or interrupt core academic tasks.
+- Keep the community's personal/founder affiliation distinct from official academic announcements where relevant.
 
-## 8. Administration
-The admin area is a separate management experience. For the MVP, include only the content-management screens needed by the student/public journeys:
+## 10. Administration
+Design admin screens from the fields and actions required by the public/student experience. The MVP needs management for:
 - Academic resources
-- News and announcements
+- Announcements
 - Associations
 - Examination dates
 - Daily quotes
-- Founder page
-- WhatsApp community invitation/settings
+- Founder-page content
+- WhatsApp invitation text, URL, and visibility
 - Basic platform/contact information
 
-Prioritise management functions after the corresponding user-facing experience and data requirements are understood. Admin functionality must support create/edit/publish/unpublish/delete where appropriate and provide validation and clear success/error feedback.
+Use clear list, form, and preview/publishing states. Support create/edit/publish/unpublish/remove where appropriate, with validation and success/error feedback. Only authorised administrators may publish announcements or change platform content.
 
-## 9. Interface and quality requirements
-- Mobile-first and responsive.
-- Consistent navigation and reusable visual patterns.
-- Clear loading, success, empty, error, unavailable, and authentication-required states where applicable.
-- Accessible labels, readable typography, and usable touch targets.
-- No fake data presented as real.
-- Keep frontend data access behind defined API contracts so mock data can later be replaced without rebuilding the interface.
+## 11. Interface and quality requirements
+- Mobile-first and responsive; desktop should also be usable.
+- Clear hierarchy, readable type, accessible labels, and practical touch targets.
+- Consistent components for the same content types across pages.
+- Clear loading, empty, no-results, error, unavailable, and authentication-required states where relevant.
+- UI should work with mock data before backend integration.
+- Do not fabricate content, dates, popularity, credentials, or endorsements.
 - Protect student information and enforce authorisation on the server.
 
-## 10. MVP exclusions
-- Multi-tenancy and institution switching.
-- Advanced AI recommendations.
-- Custom PDF reader by default.
-- Mandatory community membership.
-- Political campaign tools or claims of institutional endorsement without authorisation.
-- Features that do not support a defined user need.
+## 12. Explicit MVP exclusions
+- Multi-tenancy and institution switching
+- Indigenous-group personalisation until the list/use case is supplied
+- Advanced AI recommendations
+- Custom PDF reader by default
+- Mandatory WhatsApp membership
+- Campaign features disguised as academic functionality
+- Student-published official announcements
+- Features without a defined user need
 
-## 11. Decisions to confirm before implementation
-- Which resource types and metadata will be available at launch?
-- Who is authorised to publish official announcements?
-- What is the actual purpose and moderation plan for the WhatsApp group?
-- Which founder details and external links has the founder approved for publication?
-- What student data is truly required for accounts and personalisation?
+## 13. Assumptions to validate before public launch (not blockers for UI design)
+- Founder biography, image, message, and links must be supplied/approved; use marked placeholders in mockups.
+- The WhatsApp group's actual purpose, moderation, and promises must be confirmed; use provisional copy for design only.
+- Resource metadata should be adjusted after reviewing actual sample PDFs and how students identify them.
+- The approved WhatsApp invite URL must be supplied before the Join action is activated.

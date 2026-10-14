@@ -1,40 +1,37 @@
 # D'Voice — MVP Success Criteria
 
-## 1. Student outcomes
-- [ ] A student can find a relevant academic resource through search or browsing and open it when the file is available.
-- [ ] A student can save a resource and later find it in Saved.
+## Student outcomes
+- [ ] A student can search/browse academic resources, understand the useful available metadata, and open an available PDF.
+- [ ] A student can save a resource and find it later.
 - [ ] A student can revisit recently opened resources.
-- [ ] A student can distinguish news from official announcements and find relevant updates.
+- [ ] A student can find and understand current administrator-published announcements.
 - [ ] A student can understand an association's purpose and find available contact/membership information.
 - [ ] Home, Explore, Reading, and Profile have distinct, understandable purposes.
-- [ ] The core academic experience works without joining WhatsApp or engaging with the founder.
-- [ ] Students can find the founder page and understand the founder's connection to D'Voice without confusing it with institutional endorsement.
-- [ ] The community invitation explains its genuine purpose and opens the approved WhatsApp invite link when available.
+- [ ] Faculty personalisation is helpful but does not unnecessarily hide other resources.
+- [ ] Core academic functions remain useful without joining WhatsApp or engaging with the founder.
+- [ ] The founder page explains the founder's relationship to D'Voice without inventing claims or implying unconfirmed institutional endorsement.
+- [ ] The optional community invitation explains its confirmed purpose and opens an approved invite link when available.
 
-## 2. Administrator outcomes
-- [ ] An authorised administrator can create, edit, publish/unpublish, and remove supported content without changing source code.
-- [ ] Administrators can update resources, news, associations, examination dates, quotes, and basic platform information.
-- [ ] Administrators can edit every displayed founder-page field, including image, text, links, and visibility.
-- [ ] Administrators can update the community invitation text, URL, and visibility.
-- [ ] Unpublished, removed, invalid, or unavailable content is not presented as live content.
-- [ ] Unauthorised users cannot perform admin actions by calling backend endpoints directly.
+## Administrator outcomes
+- [ ] An authorised administrator can create/edit/publish/unpublish/remove MVP content without changing source code.
+- [ ] Administrators can manage resources, announcements, associations, examination dates, and quotes.
+- [ ] Administrators can edit every displayed founder-page field, image, link, and visibility setting.
+- [ ] Administrators can edit community invitation text, URL, and visibility.
+- [ ] Only authorised administrators can publish announcements or perform admin actions.
+- [ ] Unpublished, removed, invalid, or unavailable content is not presented as live.
 
-## 3. Product quality
-- [ ] Loading, empty, no-results, error, unavailable, and authentication-required states are handled where relevant.
-- [ ] Core journeys work on supported mobile and desktop layouts.
-- [ ] Search and listing do not require downloading the entire catalogue.
-- [ ] The UI can use mock API responses before production integration.
-- [ ] The frontend uses consistent navigation and reusable components.
-- [ ] The product does not fabricate resources, dates, quotes, popularity, credentials, or institutional endorsement.
-- [ ] The MVP does not include multi-tenant architecture or institution switching.
+## Product quality
+- [ ] Relevant pages handle loading, empty, no-results, error, unavailable, and authentication-required states.
+- [ ] Core journeys work on mobile and desktop.
+- [ ] Search/listing does not require downloading the entire catalogue.
+- [ ] The UI works with mock API responses before backend integration.
+- [ ] Components and navigation remain consistent across pages.
+- [ ] No fabricated resources, dates, quotes, popularity, credentials, invite URLs, or institutional endorsements appear as real.
+- [ ] MVP has no multi-tenant architecture or institution switching.
+- [ ] Indigenous-group personalisation is absent until requirements are provided.
 
-## 4. Release gate
-The MVP is ready for release consideration when the agreed core journeys work end to end, administrators can maintain their required content, critical security controls are verified, mobile usability has been tested, and known limitations are documented.
+## Release gate
+Consider the MVP ready for release when agreed student journeys work end to end, administrators can maintain required content, critical security controls are verified, mobile usability has been tested, and founder/community details that affect public claims are confirmed.
 
-## 5. Not required for MVP success
-- A large user count before testing.
-- Sophisticated AI recommendations or analytics.
-- A custom PDF reader unless native viewing is inadequate.
-- Multi-institution commercial deployment.
-- Mandatory community membership.
-- A large dashboard full of sections.
+## Not required for MVP success
+A large initial user count, sophisticated AI/analytics, a custom PDF reader without demonstrated need, multi-institution deployment, mandatory WhatsApp membership, or a dashboard filled with sections just to look complete.

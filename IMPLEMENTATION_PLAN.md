@@ -1,65 +1,64 @@
 # D'Voice — Implementation Plan
 
-Work in small, testable stages. Finish and verify a stage before moving on. This is a working checklist, not another full product specification.
+Use this as the working sequence. Complete and review one stage before expanding scope.
 
-## Stage 1 — Confirm the product boundary
-- [ ] Read `PRODUCT_BRIEF.md`.
-- [ ] Confirm the MVP scope and explicit exclusions.
-- [ ] Confirm the single-institution FUTA deployment.
-- [ ] Resolve the open decisions at the end of `PRODUCT_SPEC.md` that block implementation.
+## Stage 1 — Product boundary (nearly complete)
+- [x] Define the student utility purpose and FUTA-only MVP.
+- [x] Exclude multi-tenancy and institution switching.
+- [x] Set faculty as the only confirmed personalisation attribute.
+- [x] Define admin-published announcements.
+- [x] Treat founder content and WhatsApp purpose as editable/provisional for design.
 
-## Stage 2 — Design the student experience first
-- [ ] Map the key journeys: find a resource, open a PDF, save a resource, revisit it, read an update, find an association.
-- [ ] Define the public navigation and student navigation.
-- [ ] Design the dashboard/Home content hierarchy.
-- [ ] Design Explore, resource details, Reading, and Profile.
-- [ ] Design empty, loading, error, and unavailable states.
-- [ ] Review mobile layouts before detailed implementation.
+## Stage 2 — UI/UX handoff
+- [ ] Give `PRODUCT_BRIEF.md`, `PRODUCT_SPEC.md`, `SUCCESS_CRITERIA.md`, `UI_HANDOFF.md`, and `PAGE_GUIDE_TEMPLATE.md` to the UI designer/model.
+- [ ] Ask for a proposed page inventory, navigation map, core journeys, and design system first; do not generate all pages immediately.
+- [ ] Review and approve the page inventory and shared design system.
+- [ ] Complete page guides, then design/build pages one at a time.
+- [ ] Validate mobile and desktop layouts and all relevant UI states.
 
-## Stage 3 — Define data and API contracts
-- [ ] Define the resource, reading-history, saved-resource, news, association, examination-date, and quote data shapes.
-- [ ] Define the founder-page content shape and publish/visibility behaviour.
-- [ ] Define the WhatsApp invitation settings: copy, URL, visibility.
-- [ ] Define request/response contracts for the student journeys.
-- [ ] Use realistic mock data to test the UI before wiring up a real backend.
+## Stage 3 — Data and API contracts
+- [ ] Review a few actual sample PDFs and confirm the minimum useful metadata.
+- [ ] Define resource, reading-history, saved-resource, announcement, association, examination-date, quote, founder-content, and community-invitation data shapes.
+- [ ] Define request/response contracts for the agreed user journeys.
+- [ ] Prepare realistic mock data and error/empty responses.
 
-## Stage 4 — Implement the student/public MVP
-- [ ] Public Home and navigation.
-- [ ] Explore search, filters, listing, pagination/incremental loading.
-- [ ] Resource details and PDF opening.
-- [ ] Student authentication only as required by agreed journeys.
+## Stage 4 — Student/public implementation
+- [ ] Resource discovery/search and filters.
+- [ ] Resource details and PDF access.
+- [ ] Student Home.
 - [ ] Reading: Recent and Saved.
-- [ ] News and association discovery.
-- [ ] Examination dates and daily quote, with honest empty states.
-- [ ] Founder page and optional community invitation.
-- [ ] Test the complete journeys on mobile and desktop.
+- [ ] Profile with faculty preference only, if needed for the agreed flow.
+- [ ] Announcements and association discovery.
+- [ ] Examination dates and quotes when content exists.
+- [ ] Public About, Contact, and Meet the Founder.
+- [ ] Optional WhatsApp invitation.
+- [ ] Test complete journeys before expanding.
 
-## Stage 5 — Design and implement administration
-Design admin screens from the content fields and actions the user-facing product actually needs. Avoid inventing admin controls before the managed content is defined.
-- [ ] Define admin roles and permissions.
-- [ ] Define create/edit/publish/unpublish/delete flows for MVP content.
-- [ ] Implement resource management.
-- [ ] Implement news and association management.
-- [ ] Implement examination-date and quote management.
-- [ ] Implement editing of every founder-page field, image, link, and visibility setting.
-- [ ] Implement editing of community invitation text, URL, and visibility.
-- [ ] Enforce all permissions in the backend.
-- [ ] Test validation, success, failure, and permission-denied states.
+## Stage 5 — Admin design and implementation
+Plan admin screens from the user-facing content fields/actions, not in isolation.
+- [ ] Resource management.
+- [ ] Announcement management (admins publish).
+- [ ] Association management.
+- [ ] Examination-date and quote management.
+- [ ] Founder-page editor for every displayed field, image, link, and visibility setting.
+- [ ] WhatsApp invitation editor for copy, URL, and visibility.
+- [ ] Basic platform/contact information.
+- [ ] Backend authorisation, validation, and success/error states.
 
-## Stage 6 — Integration and security
-- [ ] Replace mock data with the agreed API without redesigning the UI.
-- [ ] Validate inputs on the server.
-- [ ] Check authentication and authorisation for protected actions.
-- [ ] Check that unpublished or removed content is not shown as public.
-- [ ] Test missing files, expired community links, empty datasets, and failed requests.
-- [ ] Review student-data collection and storage.
+## Stage 6 — Integration and verification
+- [ ] Replace mock data with real API responses without redesigning pages.
+- [ ] Validate all inputs on the server.
+- [ ] Verify authentication and admin permissions at the backend.
+- [ ] Test missing/unavailable PDFs, missing/expired community links, empty results, and failed requests.
+- [ ] Review privacy and stored student data.
 
 ## Stage 7 — Release readiness
-- [ ] Verify all success criteria in `SUCCESS_CRITERIA.md`.
-- [ ] Test narrow mobile screens and desktop layouts.
+- [ ] Verify `SUCCESS_CRITERIA.md`.
+- [ ] Test mobile and desktop layouts.
 - [ ] Fix critical usability, accessibility, and security issues.
+- [ ] Confirm founder details and WhatsApp purpose/moderation before public launch.
 - [ ] Document known limitations and operational responsibilities.
-- [ ] Release to a small group of students and gather feedback before expanding scope.
+- [ ] Pilot with a small group of students and gather feedback.
 
 ## Working rule
-Do not begin a new feature merely because it is mentioned in the specification. Confirm its user journey, data requirements, and acceptance criteria first. Keep the next task small enough to implement and verify in one focused session.
+A specification describes the product; it does not mean every feature should be built at once. Work from the approved page inventory and user journeys, and keep each implementation task small enough to verify.
