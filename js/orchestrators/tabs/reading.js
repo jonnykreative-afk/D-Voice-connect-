@@ -1,5 +1,5 @@
 // js/orchestrators/tabs/reading.js
-import { StateView } from '../../components/state-view.js';
+import { StateView } from '../../widgets/state-view.js';
 import { ResourceTile } from '../../components/cards/card.js';
 import { fetchRecent, fetchSaved } from '../../network/reading.mock.js';
 import { getAuth } from '../../libs/state/auth.js';
