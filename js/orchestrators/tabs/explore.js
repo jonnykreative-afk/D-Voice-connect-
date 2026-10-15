@@ -1,5 +1,5 @@
 // js/orchestrators/tabs/explore.js
-import { StateView } from '../../widgets/state-view.js';
+import { StateView } from '../../components/state-view.js';
 import { svRoot, qs } from '../../libs/utility/dom.js';
 
 import { ResourceTile } from '../../components/cards/card.js';
