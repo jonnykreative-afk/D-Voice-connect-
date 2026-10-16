@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D'voice</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="./styles/core.css">
+  <link rel="stylesheet" href="./styles/widgets/tab-shell.css">
+</head>
+<body>
+  <div class="app-shell">
+
+    <header class="app-header">
+      <div class="app-header-inner">
+        <a href="#tab-home" class="app-logo" data-switch-tab="tab-home">D'voice</a>
+      </div>
+    </header>
+
+    <div class="app-body">
+      <main class="tab-content" id="tab-home"    data-tab-panel="tab-home"></main>
+      <main class="tab-content" id="tab-explore" data-tab-panel="tab-explore"></main>
+      <main class="tab-content" id="tab-library" data-tab-panel="tab-library"></main>
+      <main class="tab-content" id="tab-profile" data-tab-panel="tab-profile"></main>
+    </div>
+
+    <nav class="app-nav" aria-label="Primary">
+      <a href="#tab-home"    class="nav-item" data-tab="tab-home">
+        <i class="fas fa-house" aria-hidden="true"></i>
+        <span class="nav-label">Home</span>
+      </a>
+      <a href="#tab-explore" class="nav-item" data-tab="tab-explore">
+        <i class="fas fa-compass" aria-hidden="true"></i>
+        <span class="nav-label">Explore</span>
+      </a>
+      <a href="#tab-library" class="nav-item" data-tab="tab-library">
+        <i class="fas fa-bookmark" aria-hidden="true"></i>
+        <span class="nav-label">Library</span>
+      </a>
+      <a href="#tab-profile" class="nav-item" data-tab="tab-profile">
+        <i class="fas fa-user" aria-hidden="true"></i>
+        <span class="nav-label">Profile</span>
+      </a>
+    </nav>
+
+  </div>
+
+  <div id="toast-root" aria-live="polite" aria-atomic="true"></div>
+
+  <script type="module" src="./js/dashboard-main.js"></script>
+</body>
+</html>
