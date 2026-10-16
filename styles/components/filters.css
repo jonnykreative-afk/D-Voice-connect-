@@ -1,0 +1,46 @@
+.filter-popover {
+  position: absolute;
+  left: var(--space-4);
+  right: var(--space-4);
+  top: calc(100% + 6px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-3);
+  z-index: 20;
+  display: none;
+}
+.filter-popover.is-open { display: block; }
+.filter-popover__title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-dim);
+  margin: 0 0 var(--space-2);
+}
+.filter-popover__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.opt {
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  background: var(--surface-2);
+}
+.opt.is-selected {
+  border-color: var(--accent);
+  color: var(--text);
+  background: rgba(45,212,191,.12);
+}
+.filter-popover__actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-3);
+}
+.link-btn { color: var(--text-muted); font-size: 13px; }
+.link-btn:hover { color: var(--text); }

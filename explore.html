@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Explore · D'voice</title>
+
+<link rel="stylesheet" href="./styles/core.css" />
+
+<link rel="stylesheet" href="./styles/components/buttons.css" />
+<link rel="stylesheet" href="./styles/components/cards.css" />
+<link rel="stylesheet" href="./styles/components/filters.css" />
+<link rel="stylesheet" href="./styles/components/states.css" />
+
+<link rel="stylesheet" href="./styles/tabs/explore.css" />
+</head>
+<body class="page-explore">
+
+<main class="explore" id="explore">
+  <header class="explore__header">
+    <h1 class="explore__title">Explore</h1>
+
+    <div class="search">
+      <span class="search__icon" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </span>
+      <label for="search-input" class="sr-only">Search resources</label>
+      <input
+        id="search-input"
+        class="search__input"
+        type="search"
+        autocomplete="off"
+        placeholder="Search by course code, title, or topic"
+      />
+      <button id="search-clear" class="search__clear" aria-label="Clear search">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="filters" id="filters" role="toolbar" aria-label="Filters"></div>
+    <div class="filter-popover" id="filter-popover" role="dialog" aria-label="Filter options"></div>
+  </header>
+
+  <p class="result-summary" id="result-summary" aria-live="polite"></p>
+
+  <section id="results" aria-label="Resource results"></section>
+
+  <div class="load-more" id="load-more"></div>
+</main>
+
+<script type="module" src="./js/orchestrators/tabs/explore.js"></script>
+
+</body>
+</html>

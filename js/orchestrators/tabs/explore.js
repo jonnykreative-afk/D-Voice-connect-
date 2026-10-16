@@ -1,194 +1,249 @@
-// js/orchestrators/tabs/explore.js
-import { StateView } from '../../components/state-view.js';
-import { svRoot, qs } from '../../libs/utility/dom.js';
+import {
+  FACULTIES, LEVELS, CONTENT_TYPES, FORMATS,
+  getResources
+} from "../../network/resources.js";
+import { qs, escapeHtml } from "../../libs/utility/dom.js";
+import { renderCards, renderSkeletons } from "../../components/cards.js";
+import { renderEmpty, renderError } from "../../components/states.js";
+import { renderChips, renderPopover } from "../../components/filters.js";
 
-import { ResourceTile } from '../../components/cards/card.js';
-import { FilterChip }   from '../../components/chips/chip.js';
+const PAGE_SIZE = 24;
 
-import { fetchCatalogue, catalogueIsEmpty } from '../../network/explore.mock.js';
-
-// UI-facing filter model. The orchestrator owns this; the network layer
-// just receives `{ q, type }`.
-const FILTERS = [
-  { value: 'all',           label: 'All' },
-  { value: 'past-question', label: 'Past Question' },
-  { value: 'lecture-note',  label: 'Lecture Note' },
-  { value: 'handout',       label: 'Handout' },
-  { value: 'textbook',      label: 'Textbook' }
-];
-
-// Local state — this tab is self-contained.
-const state = {
-  q: '',
-  type: 'all'
+const OPTIONS = {
+  faculty: FACULTIES,
+  level: LEVELS,
+  contentType: CONTENT_TYPES,
+  format: FORMATS
 };
 
-let sv = null;
-let chipsBound = false;
+const el = {
+  search:      qs("search-input"),
+  searchClear: qs("search-clear"),
+  filters:     qs("filters"),
+  popover:     qs("filter-popover"),
+  summary:     qs("result-summary"),
+  results:     qs("results"),
+  loadMore:    qs("load-more")
+};
 
-export async function initExploreTab() {
-  // Idempotent: StateView and DOM bindings are created once.
-  if (!sv) {
-    sv = new StateView(svRoot('explore-results'));
-  }
-  if (!chipsBound) {
-    renderChips();
-    bindChipClicks();
-    bindSearch();
-    chipsBound = true;
-  }
+const state = {
+  all: [],
+  query: "",
+  filters: { faculty:[], level:[], contentType:[], format:[] },
+  page: 1,
+  loading: false,
+  error: false,
+  openPopover: null
+};
 
-  await refresh();
+/* ---------- Filtering ---------- */
+
+function matchesQuery(r, q) {
+  if (!q) return true;
+  const hay = [r.title, r.courseCode, r.courseTitle, r.contributor]
+    .join(" ").toLowerCase();
+  return hay.includes(q);
 }
 
-/* =========================================================
-   RENDERING
-   ========================================================= */
-
-function renderChips() {
-  const container = qs('#explore-chips');
-  container.innerHTML = FILTERS
-    .map(f => FilterChip({ ...f, active: f.value === state.type }))
-    .join('');
+function matchesFilters(r) {
+  const f = state.filters;
+  if (f.faculty.length     && !f.faculty.includes(r.faculty))         return false;
+  if (f.level.length       && !f.level.includes(r.level))             return false;
+  if (f.contentType.length && !f.contentType.includes(r.contentType)) return false;
+  if (f.format.length      && !f.format.includes(r.format))           return false;
+  return true;
 }
 
-function renderEcho(count) {
-  const echo = qs('#explore-echo');
-  if (state.type === 'all' && !state.q) {
-    echo.hidden = true;
+function getFiltered() {
+  const q = state.query.trim().toLowerCase();
+  return state.all
+    .filter(r => matchesQuery(r, q) && matchesFilters(r))
+    .sort((a,b) => (a.dateAdded < b.dateAdded ? 1 : -1));
+}
+
+function totalActiveFilters() {
+  return Object.values(state.filters).reduce((n, arr) => n + arr.length, 0);
+}
+
+/* ---------- Rendering ---------- */
+
+function renderResults() {
+  if (state.error) {
+    el.results.replaceChildren(renderError({
+      title: "Couldn't load resources",
+      body: "Check your connection and try again.",
+      actionLabel: "Retry",
+      onAction: () => { state.error = false; load(); }
+    }));
+    el.loadMore.innerHTML = "";
     return;
   }
-  const bits = [];
-  if (state.q) bits.push(`“${state.q}”`);
-  if (state.type !== 'all') {
-    bits.push(FILTERS.find(f => f.value === state.type)?.label ?? state.type);
+
+  if (state.all.length === 0) {
+    el.results.replaceChildren(renderEmpty({
+      title: "No resources yet",
+      body: "D'voice is still being populated. Check back soon."
+    }));
+    el.loadMore.innerHTML = "";
+    return;
   }
-  echo.textContent = `${count} result${count === 1 ? '' : 's'} · ${bits.join(' · ')}`;
-  echo.hidden = false;
-}
 
-/* =========================================================
-   BINDINGS
-   ========================================================= */
-
-function bindChipClicks() {
-  qs('#explore-chips').addEventListener('click', (e) => {
-    const btn = e.target.closest('.filter-chip');
-    if (!btn) return;
-    const value = btn.dataset.filterValue;
-    if (value === state.type) return;
-
-    state.type = value;
-    // Cheap re-render: only the chip states changed.
-    qs('#explore-chips').querySelectorAll('.filter-chip').forEach(el => {
-      const active = el.dataset.filterValue === value;
-      el.classList.toggle('is-active', active);
-      el.setAttribute('aria-pressed', String(active));
-    });
-
-    refresh();
-  });
-}
-
-function bindSearch() {
-  const form = qs('[data-action="explore-search"]');
-  const input = form.elements.q;
-  let timer = null;
-
-  // Debounced live search; submit also works (for no-JS fallback / Enter key).
-  input.addEventListener('input', () => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      state.q = input.value;
-      refresh();
-    }, 250);
-  });
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    state.q = input.value;
-    refresh();
-  });
-}
-
-/* =========================================================
-   REFRESH (the orchestrator's core loop)
-   ========================================================= */
-
-async function refresh() {
-  sv.show('loading');
-
-  try {
-    const items = await fetchCatalogue({ q: state.q, type: state.type });
-
-    if (items.length === 0) {
-      // Two flavours of empty. Same widget, different message.
-      renderEmpty(items);
-      sv.show('empty');
-      renderEcho(0);
-      return;
-    }
-
-    // The tile needs to know if each item is already saved.
-    // Saved IDs come from a real store later; for now, empty set.
-    const savedIds = new Set();
-    sv.render(items, (item) => ResourceTile(item, { saved: savedIds.has(item.id) }));
-
-    bindTileActions();
-    renderEcho(items.length);
-  } catch (err) {
-    console.error('Explore refresh failed:', err);
-    sv.show('empty'); // TODO: swap for 'error' when StateView supports it cleanly
+  const all = getFiltered();
+  if (all.length === 0) {
+    el.results.replaceChildren(renderEmpty({
+      title: "No matches",
+      body: "Nothing matches your current search and filters.",
+      actionLabel: "Clear search & filters",
+      onAction: clearAll
+    }));
+    el.loadMore.innerHTML = "";
+    renderSummary(0);
+    return;
   }
-}
 
-function renderEmpty(items) {
-  const slot = sv.root.querySelector('[data-empty-slot]');
-  if (!slot) return;
+  const visible = all.slice(0, state.page * PAGE_SIZE);
+  el.results.replaceChildren(renderCards(visible));
 
-  // catalogueIsEmpty() is checked here, not inside the renderer, because
-  // this is the layer that knows *why* we're empty.
-  if (catalogueIsEmpty()) {
-    slot.innerHTML = `
-      <i class="fas fa-inbox"></i>
-      <p>Nothing has been published yet.</p>
-      <span class="sv__empty-hint">Check back soon.</span>
-    `;
+  if (visible.length < all.length) {
+    const btn = document.createElement("button");
+    btn.className = "btn";
+    btn.textContent = `Load more (${all.length - visible.length} remaining)`;
+    btn.addEventListener("click", loadMore);
+    el.loadMore.replaceChildren(btn);
   } else {
-    slot.innerHTML = `
-      <i class="fas fa-search"></i>
-      <p>No resources match your filters.</p>
-      <span class="sv__empty-hint">Try clearing the search or picking All.</span>
-    `;
+    const end = document.createElement("div");
+    end.className = "load-more__end";
+    end.textContent = "End of results";
+    el.loadMore.replaceChildren(end);
   }
+
+  renderSummary(all.length);
 }
 
-/* =========================================================
-   TILE ACTIONS (event delegation, bound once per render)
-   ========================================================= */
+function renderSummary(count) {
+  const parts = [`<strong>${count}</strong> resource${count === 1 ? "" : "s"}`];
+  const fa = totalActiveFilters();
+  if (fa) parts.push(`${fa} filter${fa === 1 ? "" : "s"} applied`);
+  if (state.query.trim()) parts.push(`matching "${escapeHtml(state.query.trim())}"`);
+  el.summary.innerHTML = parts.join(" · ");
+}
 
-function bindTileActions() {
-  // Delegate on the mount node so re-renders don't leak listeners.
-  const mount = sv.mount;
-  if (mount.dataset.bound) return;
-  mount.dataset.bound = '1';
-
-  mount.addEventListener('click', (e) => {
-    const save = e.target.closest('[data-save-toggle]');
-    if (!save) return;
-    e.preventDefault();
-    e.stopPropagation();
-
-    const tile = save.closest('.resource-tile');
-    const id = Number(tile.dataset.id);
-
-    // Optimistic UI. Real implementation calls network → Save store.
-    const isSaved = save.classList.toggle('is-saved');
-    const icon = save.querySelector('i');
-    icon.className = isSaved ? 'fas fa-bookmark' : 'far fa-bookmark';
-    save.setAttribute('aria-label', isSaved ? 'Remove from saved' : 'Save');
-
-    // Later: dispatch a real save/unsave here, keyed by `id`.
-    void id;
+function renderFiltersUI() {
+  renderChips(el.filters, {
+    filters: state.filters,
+    openKey: state.openPopover,
+    onChipClick: openPopover
+  });
+  renderPopover(el.popover, {
+    key: state.openPopover,
+    options: state.openPopover ? OPTIONS[state.openPopover] : [],
+    selected: state.openPopover ? state.filters[state.openPopover] : [],
+    onToggle: (value) => toggleOption(state.openPopover, value),
+    onClear: () => {
+      state.filters[state.openPopover] = [];
+      state.page = 1;
+      renderFiltersUI();
+      renderResults();
+    },
+    onDone: closePopover
   });
 }
+
+/* ---------- Popover ---------- */
+
+function openPopover(key) {
+  if (state.openPopover === key) return closePopover();
+  state.openPopover = key;
+  renderFiltersUI();
+}
+
+function closePopover() {
+  state.openPopover = null;
+  renderFiltersUI();
+}
+
+function toggleOption(key, value) {
+  if (!key) return;
+  const arr = state.filters[key];
+  const i = arr.indexOf(value);
+  if (i === -1) arr.push(value); else arr.splice(i, 1);
+  state.page = 1;
+  renderFiltersUI();
+  renderResults();
+}
+
+/* ---------- Actions ---------- */
+
+function loadMore() {
+  if (state.loading) return;
+  state.loading = true;
+  setTimeout(() => {
+    state.page += 1;
+    state.loading = false;
+    renderResults();
+  }, 250);
+}
+
+function clearAll() {
+  state.query = "";
+  state.filters = { faculty:[], level:[], contentType:[], format:[] };
+  state.page = 1;
+  el.search.value = "";
+  el.searchClear.classList.remove("is-visible");
+  renderFiltersUI();
+  renderResults();
+}
+
+/* ---------- Data load ---------- */
+
+async function load() {
+  el.results.replaceChildren(renderSkeletons(6));
+  el.loadMore.innerHTML = "";
+  el.summary.innerHTML = "";
+  try {
+    state.all = await getResources();
+    state.error = false;
+  } catch (err) {
+    console.error(err);
+    state.error = true;
+  }
+  renderFiltersUI();
+  renderResults();
+}
+
+/* ---------- Events ---------- */
+
+el.search.addEventListener("input", () => {
+  state.query = el.search.value;
+  state.page = 1;
+  el.searchClear.classList.toggle("is-visible", state.query.length > 0);
+  renderResults();
+});
+
+el.searchClear.addEventListener("click", () => {
+  state.query = "";
+  state.page = 1;
+  el.search.value = "";
+  el.searchClear.classList.remove("is-visible");
+  el.search.focus();
+  renderResults();
+});
+
+document.addEventListener("click", (e) => {
+  if (!state.openPopover) return;
+  const insidePopover = el.popover.contains(e.target);
+  const onChip = e.target.closest("[data-filter]");
+  if (!insidePopover && !onChip) closePopover();
+});
+
+el.results.addEventListener("click", (e) => {
+  const card = e.target.closest(".card");
+  if (!card) return;
+  const resource = state.all.find(r => r.id === card.dataset.id);
+  if (!resource) return;
+  console.log("[Explore] open details sheet for", resource);
+});
+
+/* ---------- Init ---------- */
+
+load();

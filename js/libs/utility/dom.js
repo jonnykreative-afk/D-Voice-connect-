@@ -1,9 +1,13 @@
-// js/libs/utility/dom.js
-export const qs  = (sel, ctx = document) => ctx.querySelector(sel);
-export const qsa = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
+export function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
 
-/**
- * Query a StateView root by its data-sv name within a scope.
- */
-export const svRoot = (name, scope = document) =>
-  scope.querySelector(`.sv[data-sv="${name}"]`);
+export function formatDate(iso) {
+  const d = new Date(iso);
+  if (isNaN(d)) return "";
+  return d.toLocaleDateString(undefined, { month:"short", year:"numeric" });
+}
+
+export function qs(id) { return document.getElementById(id); }

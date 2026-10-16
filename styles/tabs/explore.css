@@ -1,15 +1,84 @@
-.explore-search {
-  margin-bottom: var(--space-md);
+.page-explore .explore {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-4) var(--space-6);
 }
 
-.explore-echo {
-  font-size: 0.8rem;
+.page-explore .explore__header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--bg);
+  padding: var(--space-3) var(--space-4);
+  margin: 0 calc(var(--space-4) * -1) var(--space-3);
+  border-bottom: 1px solid var(--border);
+}
+.page-explore .explore__title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 var(--space-3);
+  letter-spacing: -0.01em;
+}
+
+.page-explore .search { position: relative; margin-bottom: var(--space-3); }
+.page-explore .search__input {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 11px 40px 11px 38px;
+  outline: none;
+  transition: border-color .15s, background .15s;
+}
+.page-explore .search__input::placeholder { color: var(--text-dim); }
+.page-explore .search__input:focus {
+  border-color: var(--primary);
+  background: var(--surface-2);
+}
+.page-explore .search__icon {
+  position: absolute;
+  left: 12px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-dim);
+  pointer-events: none;
+}
+.page-explore .search__clear {
+  position: absolute;
+  right: 8px; top: 50%;
+  transform: translateY(-50%);
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
   color: var(--text-muted);
-  margin: var(--space-sm) 0 var(--space-md);
+}
+.page-explore .search__clear:hover { background: var(--surface-2); }
+.page-explore .search__clear.is-visible { display: flex; }
+
+.page-explore .result-summary {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: var(--space-3) 0;
+  min-height: 18px;
+}
+.page-explore .result-summary strong { color: var(--text); font-weight: 600; }
+
+.page-explore .load-more {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-5) 0 var(--space-3);
+}
+.page-explore .load-more__end {
+  font-size: 12px;
+  color: var(--text-dim);
+  text-align: center;
+  padding: var(--space-5) 0;
 }
 
-@media (min-width: 768px) {
-  #tab-explore .card-grid {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  }
+@media (min-width: 640px) {
+  .page-explore .explore__title { font-size: 22px; }
+}
+@media (min-width: 960px) {
+  .page-explore .explore { max-width: 960px; }
 }

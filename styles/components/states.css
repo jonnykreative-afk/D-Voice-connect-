@@ -1,0 +1,12 @@
+.state {
+  padding: var(--space-6) var(--space-4);
+  text-align: center;
+  color: var(--text-muted);
+}
+.state__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 var(--space-2);
+}
+.state__body { font-size: 13px; margin: 0 0 var(--space-4); }
