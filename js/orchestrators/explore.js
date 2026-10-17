@@ -5,7 +5,7 @@
 
 import { $, $$, el } from '../libs/dom.js';
 import { createViewState } from '../libs/view-state.js';
-import { renderResourceCard } from '../components/resource-card.js';
+import { renderResourceCard } from '../components/cards.js';
 import { renderChip } from '../components/chip.js';
 import { getResources, getFilterOptions, setFixture } from '../network/mock.js';
 

@@ -187,3 +187,40 @@ export async function getRecentlyAdded({ faculty, level, limit = 8 } = {}) {
 export async function getNewsPreview(limit = 3) {
   return delay(NEWS.slice(0, limit));
 }
+
+/* ---------- Library ---------- */
+
+let SAVED_IDS = new Set(['r1', 'r3']);
+
+export async function getSavedResources() {
+  const items = RESOURCES.filter((r) => SAVED_IDS.has(r.id));
+  return delay(items);
+}
+
+export async function saveResource(id) {
+  SAVED_IDS.add(id);
+  return delay({ ok: true });
+}
+
+export async function unsaveResource(id) {
+  SAVED_IDS.delete(id);
+  return delay({ ok: true });
+}
+
+/* ---------- Profile ---------- */
+
+let PROFILE = {
+  name: 'Student',
+  email: 'student@example.com',
+  faculty: 'science',
+  level: '200',
+};
+
+export async function getProfile() {
+  return delay(PROFILE);
+}
+
+export async function updateProfile(patch) {
+  PROFILE = { ...PROFILE, ...patch };
+  return delay(PROFILE);
+}

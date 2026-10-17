@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="./styles/index.css">
 </head>
 <body class="has-tab-shell">
-  <div class="app-shell">
 
+  <div class="app-shell">
     <header class="app-header">
       <div class="app-header-inner">
         <a href="#tab-home" class="app-logo" data-switch-tab="tab-home">D'voice</a>
@@ -17,35 +17,84 @@
     </header>
 
     <div class="app-body">
-      <main class="tab-content" id="tab-home"    data-tab-panel="tab-home"></main>
-      
+
+      <!-- ============= HOME ============= -->
+      <main class="tab-content" id="tab-home" data-tab-panel="tab-home">
+        <div class="home-page">
+          <header class="home-page__greeting">
+            <p class="home-page__hello">Hi there.</p>
+            <h1 class="home-page__title">What are you studying today?</h1>
+            <div class="home-search">
+              <label for="home-search-input" class="sr-only">Search resources</label>
+              <input id="home-search-input" type="search" data-widget="home-search"
+                     placeholder="Search by course code, title, or topic"
+                     autocomplete="off" inputmode="search">
+            </div>
+          </header>
+
+          <section class="home-section" data-section="featured" hidden>
+            <header class="home-section__header">
+              <h2 class="home-section__title">Start here</h2>
+            </header>
+            <div class="catalogue-skeleton">
+              <div class="skeleton skeleton-block"></div>
+              <div class="skeleton skeleton-block"></div>
+            </div>
+          </section>
+
+          <section class="home-section" data-section="recent" data-state="loading">
+            <header class="home-section__header">
+              <h2 class="home-section__title">Recently added</h2>
+            </header>
+            <div data-state="loading">
+              <div class="catalogue-skeleton"><div class="skeleton skeleton-block"></div></div>
+            </div>
+            <div data-state="empty" hidden></div>
+            <div data-state="error" hidden></div>
+            <div data-state="data" hidden></div>
+          </section>
+
+          <section class="home-section" data-section="faculties">
+            <header class="home-section__header">
+              <h2 class="home-section__title">Browse by faculty</h2>
+            </header>
+            <div class="home-faculties" data-widget="faculties"></div>
+          </section>
+
+          <section class="home-section" data-section="news" data-state="loading">
+            <header class="home-section__header">
+              <h2 class="home-section__title">Campus news</h2>
+            </header>
+            <div data-state="loading">
+              <div class="catalogue-skeleton"><div class="skeleton skeleton-block"></div></div>
+            </div>
+            <div data-state="empty" hidden></div>
+            <div data-state="error" hidden></div>
+            <div data-state="data" hidden></div>
+          </section>
+
+          <footer class="home-community">
+            <a class="home-community__link" href="#">Join the WhatsApp community (optional)</a>
+          </footer>
+        </div>
+      </main>
+
+      <!-- ============= EXPLORE ============= -->
       <main class="tab-content" id="tab-explore" data-tab-panel="tab-explore">
         <div class="explore-page">
           <header class="explore-header">
             <h1 class="explore-title">Explore</h1>
-        
             <div class="explore-search">
               <label for="explore-search-input" class="sr-only">Search resources</label>
-              <input
-                id="explore-search-input"
-                type="search"
-                data-widget="search-input"
-                placeholder="Search by course code, title, or topic"
-                autocomplete="off"
-                inputmode="search"
-              >
+              <input id="explore-search-input" type="search" data-widget="search-input"
+                     placeholder="Search by course code, title, or topic"
+                     autocomplete="off" inputmode="search">
             </div>
-        
-            <div class="explore-filters" data-widget="filters" aria-label="Filters">
-              <!-- Chips land here in the next step. Kept as container so the
-                   orchestrator can mount them without a structural change. -->
-            </div>
-        
+            <div class="explore-filters" data-widget="filters" aria-label="Filters"></div>
             <p class="explore-result-summary" data-widget="result-summary" aria-live="polite"></p>
           </header>
-        
+
           <section data-widget="catalogue" data-current-state="loading">
-        
             <div data-state="loading">
               <div class="catalogue-skeleton">
                 <div class="skeleton skeleton-block"></div>
@@ -53,17 +102,12 @@
                 <div class="skeleton skeleton-block"></div>
               </div>
             </div>
-        
             <div data-state="empty" hidden>
               <div class="state-empty">
                 <p class="state-empty__title">Nothing matches that search yet.</p>
-                <p class="state-empty__body">
-                  Try a broader term — a course code like <strong>MTH 201</strong>,
-                  or the topic itself.
-                </p>
+                <p class="state-empty__body">Try a broader term — a course code like <strong>MTH 201</strong>, or the topic itself.</p>
               </div>
             </div>
-        
             <div data-state="error" hidden>
               <div class="state-error">
                 <p class="state-error__title">Couldn't load resources.</p>
@@ -71,16 +115,101 @@
                 <button type="button" class="btn btn--primary" data-action="retry">Retry</button>
               </div>
             </div>
-        
             <div data-state="data" hidden></div>
-        
           </section>
         </div>
       </main>
-      
-      <main class="tab-content" id="tab-library" data-tab-panel="tab-library"></main>
-      
-      <main class="tab-content" id="tab-profile" data-tab-panel="tab-profile"></main>
+
+      <!-- ============= LIBRARY ============= -->
+      <main class="tab-content" id="tab-library" data-tab-panel="tab-library">
+        <div class="library-page">
+          <header class="library-header">
+            <h1 class="library-title">My Library</h1>
+            <div class="library-search">
+              <label for="library-search-input" class="sr-only">Search saved resources</label>
+              <input id="library-search-input" type="search" data-widget="library-search"
+                     placeholder="Search saved resources"
+                     autocomplete="off" inputmode="search">
+            </div>
+            <div class="library-sort" role="group" aria-label="Sort saved resources">
+              <button type="button" class="library-sort__btn is-active" data-sort="recent" aria-pressed="true">Recently saved</button>
+              <button type="button" class="library-sort__btn" data-sort="title" aria-pressed="false">Title A–Z</button>
+            </div>
+          </header>
+
+          <section data-widget="saved-list" data-current-state="loading">
+            <div data-state="loading">
+              <div class="catalogue-skeleton">
+                <div class="skeleton skeleton-block"></div>
+                <div class="skeleton skeleton-block"></div>
+              </div>
+            </div>
+            <div data-state="empty" hidden></div>
+            <div data-state="error" hidden>
+              <div class="state-error">
+                <p class="state-error__title">Couldn't load your library.</p>
+                <p class="state-error__body">Check your connection and try again.</p>
+                <button type="button" class="btn btn--primary" data-action="retry">Retry</button>
+              </div>
+            </div>
+            <div data-state="data" hidden></div>
+          </section>
+        </div>
+      </main>
+
+      <!-- ============= PROFILE ============= -->
+      <main class="tab-content" id="tab-profile" data-tab-panel="tab-profile">
+        <div class="profile-page">
+          <h1 class="profile-title">Profile</h1>
+
+          <section class="profile-section">
+            <h2 class="profile-section__title">Your context</h2>
+            <div class="profile-field" data-field="faculty">
+              <span class="profile-field__label">Faculty</span>
+              <div class="profile-field__control">
+                <span class="profile-field__value" data-value>—</span>
+                <button type="button" class="profile-field__edit" data-action="edit-field" data-field="faculty">Edit</button>
+              </div>
+            </div>
+            <div class="profile-field" data-field="level">
+              <span class="profile-field__label">Level</span>
+              <div class="profile-field__control">
+                <span class="profile-field__value" data-value>—</span>
+                <button type="button" class="profile-field__edit" data-action="edit-field" data-field="level">Edit</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="profile-section">
+            <h2 class="profile-section__title">Account</h2>
+            <div class="profile-field" data-field="name">
+              <span class="profile-field__label">Name</span>
+              <div class="profile-field__control">
+                <span class="profile-field__value" data-value>—</span>
+                <button type="button" class="profile-field__edit" data-action="edit-field" data-field="name">Edit</button>
+              </div>
+            </div>
+            <div class="profile-field" data-field="email">
+              <span class="profile-field__label">Email</span>
+              <div class="profile-field__control">
+                <span class="profile-field__value" data-value>—</span>
+                <span class="profile-field__note">Read-only</span>
+              </div>
+            </div>
+            <button type="button" class="btn btn--ghost profile-signout" data-action="sign-out">Sign out</button>
+          </section>
+
+          <section class="profile-section">
+            <h2 class="profile-section__title">Community</h2>
+            <a class="profile-community-link" href="#">Join the WhatsApp community (optional)</a>
+          </section>
+
+          <section class="profile-section profile-section--danger">
+            <button type="button" class="profile-delete" data-action="delete-account">Delete account</button>
+          </section>
+        </div>
+      </main>
+
     </div>
 
     <nav class="app-nav" aria-label="Primary">
@@ -101,11 +230,10 @@
         <span class="nav-label">Profile</span>
       </a>
     </nav>
-
   </div>
 
-  <div id="toast-root" aria-live="polite" aria-atomic="true"></div>
-  <div id="toast-root" data-widget="toast"></div>
+  <div data-widget="toast"></div>
+
   <script type="module" src="./js/dashboard-main.js"></script>
 </body>
 </html>

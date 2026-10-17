@@ -1,0 +1,99 @@
+.library-page { display: flex; flex-direction: column; gap: var(--space-4); }
+
+.library-header { display: flex; flex-direction: column; gap: var(--space-3); }
+
+.library-title {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--color-primary-900);
+  letter-spacing: -0.02em;
+}
+
+.library-search { position: relative; }
+.library-search::before {
+  content: "\f002";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  left: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-ink-500);
+  font-size: 14px;
+  pointer-events: none;
+}
+.library-search input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 var(--space-4) 0 calc(var(--space-4) + 22px);
+  background: var(--color-surface-0);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--text-md);
+}
+.library-search input::placeholder { color: var(--color-ink-300); }
+.library-search input:focus-visible {
+  outline: none;
+  border-color: var(--color-primary-500);
+  box-shadow: 0 0 0 3px var(--color-primary-100);
+}
+.library-search input::-webkit-search-decoration,
+.library-search input::-webkit-search-cancel-button { -webkit-appearance: none; }
+
+.library-sort {
+  display: flex;
+  gap: var(--space-2);
+}
+.library-sort__btn {
+  min-height: 36px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-0);
+  border: 1px solid var(--color-border);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-ink-700);
+}
+.library-sort__btn.is-active {
+  background: var(--color-primary-100);
+  border-color: var(--color-primary-500);
+  color: var(--color-primary-700);
+}
+
+[data-widget="saved-list"] [data-state="data"] {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.library-item { position: relative; }
+
+.library-unsave {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-100);
+  border: none;
+  color: var(--color-ink-500);
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 120ms ease, color 120ms ease;
+  z-index: 1;
+}
+.library-unsave::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: inherit;
+}
+
+.library-unsave:hover {
+  background: var(--color-danger-100);
+  color: var(--color-danger);
+}

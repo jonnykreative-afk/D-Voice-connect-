@@ -1,5 +1,5 @@
 /* =========================================================
-   components/resource-card.js
+   components/cards.js
    Presentation-only renderer for one resource card.
    No fetch. No listeners. Orchestrator wires clicks.
    ========================================================= */
@@ -77,6 +77,40 @@ export function renderResourceCard(resource) {
   return card;
 }
 
+export function renderNewsCard(item) {
+  const card = el('a', {
+    class: 'news-card',
+    href: `#news-${item.id}`,
+  });
+
+  if (item.image) {
+    const img = el('img', {
+      class: 'news-card__image',
+      src: item.image,
+      alt: '',
+      loading: 'lazy',
+    });
+    card.append(img);
+  }
+
+  const body = el('div', { class: 'news-card__body' });
+  body.append(el('h3', { class: 'news-card__headline', text: item.headline }));
+
+  if (item.excerpt) {
+    body.append(el('p', { class: 'news-card__excerpt', text: item.excerpt }));
+  }
+
+  if (item.date) {
+    body.append(el('p', {
+      class: 'news-card__date',
+      text: formatRelativeDate(item.date),
+    }));
+  }
+
+  card.append(body);
+  return card;
+}
+
 /* ---------- helpers ---------- */
 
 function formatRelativeDate(iso) {
@@ -88,3 +122,4 @@ function formatRelativeDate(iso) {
   if (diffDays < 30)  return `${diffDays} days ago`;
   return then.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
 }
+

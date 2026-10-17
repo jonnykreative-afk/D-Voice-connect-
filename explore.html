@@ -15,33 +15,20 @@
     </div>
   </header>
 
-  <main id="tab-explore" data-tab-panel="tab-explore">
-    <div class="explore-page">
+  <main class="explore-page">
     <header class="explore-header">
       <h1 class="explore-title">Explore</h1>
-  
       <div class="explore-search">
         <label for="explore-search-input" class="sr-only">Search resources</label>
-        <input
-          id="explore-search-input"
-          type="search"
-          data-widget="search-input"
-          placeholder="Search by course code, title, or topic"
-          autocomplete="off"
-          inputmode="search"
-        >
+        <input id="explore-search-input" type="search" data-widget="search-input"
+               placeholder="Search by course code, title, or topic"
+               autocomplete="off" inputmode="search">
       </div>
-  
-      <div class="explore-filters" data-widget="filters" aria-label="Filters">
-        <!-- Chips land here in the next step. Kept as container so the
-             orchestrator can mount them without a structural change. -->
-      </div>
-  
+      <div class="explore-filters" data-widget="filters" aria-label="Filters"></div>
       <p class="explore-result-summary" data-widget="result-summary" aria-live="polite"></p>
     </header>
-  
+
     <section data-widget="catalogue" data-current-state="loading">
-  
       <div data-state="loading">
         <div class="catalogue-skeleton">
           <div class="skeleton skeleton-block"></div>
@@ -49,17 +36,12 @@
           <div class="skeleton skeleton-block"></div>
         </div>
       </div>
-  
       <div data-state="empty" hidden>
         <div class="state-empty">
           <p class="state-empty__title">Nothing matches that search yet.</p>
-          <p class="state-empty__body">
-            Try a broader term — a course code like <strong>MTH 201</strong>,
-            or the topic itself.
-          </p>
+          <p class="state-empty__body">Try a broader term — a course code like <strong>MTH 201</strong>, or the topic itself.</p>
         </div>
       </div>
-  
       <div data-state="error" hidden>
         <div class="state-error">
           <p class="state-error__title">Couldn't load resources.</p>
@@ -67,21 +49,17 @@
           <button type="button" class="btn btn--primary" data-action="retry">Retry</button>
         </div>
       </div>
-  
       <div data-state="data" hidden></div>
-  
     </section>
-  </div>
   </main>
 
   <div data-widget="toast"></div>
 
   <script type="module">
-    import { initExplore } from './js/orchestrators/explore.js';
-    import { mountToast } from './js/widgets/toast.js';
+    import { initExplore } from './orchestrators/explore.js';
+    import { mountToast } from './widgets/toast.js';
     mountToast();
     initExplore();
   </script>
-
 </body>
 </html>

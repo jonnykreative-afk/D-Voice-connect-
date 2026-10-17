@@ -1,7 +1,3 @@
-/* =========================================================
-   D'voice — stylesheet entry point
-   ========================================================= */
-
 @layer core, utility, components, widgets, states, pages;
 
 @import url("./core.css")              layer(core);
@@ -10,3 +6,6 @@
 @import url("./widgets/toast.css")     layer(widgets);
 @import url("./components.css")        layer(components);
 @import url("./tabs/explore.css")     layer(pages);
+@import url("./tabs/home.css")        layer(pages);
+@import url("./tabs/library.css")     layer(pages);
+@import url("./tabs/profile.css")     layer(pages);
