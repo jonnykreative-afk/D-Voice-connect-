@@ -1,0 +1,12 @@
+/* =========================================================
+   D'voice — stylesheet entry point
+   Load order per POMA §5.
+   ========================================================= */
+
+@layer core, utility, components, widgets, states, pages;
+
+@import url("./core.css")              layer(core);
+@import url("./states.css")            layer(states);
+@import url("./widgets/tab-shell.css") layer(widgets);
+@import url("./widgets/toast.css")     layer(widgets);
+@import url("./components.css")        layer(components);

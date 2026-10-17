@@ -87,3 +87,71 @@ a { color: inherit; text-decoration: none; }
 button { font: inherit; cursor: pointer; }
 
 img { max-width: 100%; display: block; }
+
+/* =========================================================
+   D'voice — core: base elements, focus, tap targets
+   Appended to tokens. Do not add component rules here.
+   ========================================================= */
+
+/* ---------- Base elements ---------- */
+
+h1, h2, h3, h4 {
+  margin: 0;
+  line-height: 1.25;
+  color: var(--color-ink-900);
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: var(--text-2xl); font-weight: 700; }
+h2 { font-size: var(--text-xl);  font-weight: 700; }
+h3 { font-size: var(--text-lg);  font-weight: 600; }
+h4 { font-size: var(--text-md);  font-weight: 600; }
+
+p { margin: 0; }
+
+input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* ---------- Focus ---------- */
+
+:focus { outline: none; }
+
+:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ---------- Tap targets ---------- */
+
+/* Any interactive element must meet 44px min. Apply per-element
+   in components; this is the floor check, not the rule. */
+button,
+[role="button"],
+a,
+input,
+select,
+textarea {
+  min-height: 44px;
+}
+
+/* But text links inline in paragraphs shouldn't be forced tall. */
+p a,
+li a:not([class]) {
+  min-height: 0;
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
