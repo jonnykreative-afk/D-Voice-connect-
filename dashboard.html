@@ -5,10 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>D'voice</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="./styles/core.css">
-  <link rel="stylesheet" href="./styles/widgets/tab-shell.css">
+  <link rel="stylesheet" href="./styles/index.css">
 </head>
-<body>
+<body class="has-tab-shell">
   <div class="app-shell">
 
     <header class="app-header">
@@ -19,7 +18,64 @@
 
     <div class="app-body">
       <main class="tab-content" id="tab-home"    data-tab-panel="tab-home"></main>
-      <main class="tab-content" id="tab-explore" data-tab-panel="tab-explore"></main>
+      <main class="tab-content" id="tab-explore" data-tab-panel="tab-explore">
+        <div class="explore-page">
+          <header class="explore-header">
+            <h1 class="explore-title">Explore</h1>
+        
+            <div class="explore-search">
+              <label for="explore-search-input" class="sr-only">Search resources</label>
+              <input
+                id="explore-search-input"
+                type="search"
+                data-widget="search-input"
+                placeholder="Search by course code, title, or topic"
+                autocomplete="off"
+                inputmode="search"
+              >
+            </div>
+        
+            <div class="explore-filters" data-widget="filters" aria-label="Filters">
+              <!-- Chips land here in the next step. Kept as container so the
+                   orchestrator can mount them without a structural change. -->
+            </div>
+        
+            <p class="explore-result-summary" data-widget="result-summary" aria-live="polite"></p>
+          </header>
+        
+          <section data-widget="catalogue" data-current-state="loading">
+        
+            <div data-state="loading">
+              <div class="catalogue-skeleton">
+                <div class="skeleton skeleton-block"></div>
+                <div class="skeleton skeleton-block"></div>
+                <div class="skeleton skeleton-block"></div>
+              </div>
+            </div>
+        
+            <div data-state="empty" hidden>
+              <div class="state-empty">
+                <p class="state-empty__title">Nothing matches that search yet.</p>
+                <p class="state-empty__body">
+                  Try a broader term — a course code like <strong>MTH 201</strong>,
+                  or the topic itself.
+                </p>
+              </div>
+            </div>
+        
+            <div data-state="error" hidden>
+              <div class="state-error">
+                <p class="state-error__title">Couldn't load resources.</p>
+                <p class="state-error__body">Check your connection and try again.</p>
+                <button type="button" class="btn btn--primary" data-action="retry">Retry</button>
+              </div>
+            </div>
+        
+            <div data-state="data" hidden></div>
+        
+          </section>
+        </div>
+      </main>
       <main class="tab-content" id="tab-library" data-tab-panel="tab-library"></main>
       <main class="tab-content" id="tab-profile" data-tab-panel="tab-profile"></main>
     </div>
@@ -46,7 +102,7 @@
   </div>
 
   <div id="toast-root" aria-live="polite" aria-atomic="true"></div>
-
+  <div id="toast-root" data-widget="toast"></div>
   <script type="module" src="./js/dashboard-main.js"></script>
 </body>
 </html>

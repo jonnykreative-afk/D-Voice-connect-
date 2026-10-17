@@ -1,62 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Explore · D'voice</title>
-
-<link rel="stylesheet" href="./styles/core.css" />
-
-<link rel="stylesheet" href="./styles/components/buttons.css" />
-<link rel="stylesheet" href="./styles/components/cards.css" />
-<link rel="stylesheet" href="./styles/components/filters.css" />
-<link rel="stylesheet" href="./styles/components/states.css" />
-
-<link rel="stylesheet" href="./styles/tabs/explore.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore — D'voice</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="./styles/index.css">
 </head>
 <body class="page-explore">
 
-<main class="explore" id="explore">
-  <header class="explore__header">
-    <h1 class="explore__title">Explore</h1>
-
-    <div class="search">
-      <span class="search__icon" aria-hidden="true">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <circle cx="11" cy="11" r="7"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-      </span>
-      <label for="search-input" class="sr-only">Search resources</label>
-      <input
-        id="search-input"
-        class="search__input"
-        type="search"
-        autocomplete="off"
-        placeholder="Search by course code, title, or topic"
-      />
-      <button id="search-clear" class="search__clear" aria-label="Clear search">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-        </svg>
-      </button>
+  <header class="app-header">
+    <div class="app-header-inner">
+      <a href="/" class="app-logo">D'voice</a>
     </div>
-
-    <div class="filters" id="filters" role="toolbar" aria-label="Filters"></div>
-    <div class="filter-popover" id="filter-popover" role="dialog" aria-label="Filter options"></div>
   </header>
 
-  <p class="result-summary" id="result-summary" aria-live="polite"></p>
+  <main class="tab-content active" id="tab-explore" data-tab-panel="tab-explore">
+    <div class="explore-page">
+    <header class="explore-header">
+      <h1 class="explore-title">Explore</h1>
+  
+      <div class="explore-search">
+        <label for="explore-search-input" class="sr-only">Search resources</label>
+        <input
+          id="explore-search-input"
+          type="search"
+          data-widget="search-input"
+          placeholder="Search by course code, title, or topic"
+          autocomplete="off"
+          inputmode="search"
+        >
+      </div>
+  
+      <div class="explore-filters" data-widget="filters" aria-label="Filters">
+        <!-- Chips land here in the next step. Kept as container so the
+             orchestrator can mount them without a structural change. -->
+      </div>
+  
+      <p class="explore-result-summary" data-widget="result-summary" aria-live="polite"></p>
+    </header>
+  
+    <section data-widget="catalogue" data-current-state="loading">
+  
+      <div data-state="loading">
+        <div class="catalogue-skeleton">
+          <div class="skeleton skeleton-block"></div>
+          <div class="skeleton skeleton-block"></div>
+          <div class="skeleton skeleton-block"></div>
+        </div>
+      </div>
+  
+      <div data-state="empty" hidden>
+        <div class="state-empty">
+          <p class="state-empty__title">Nothing matches that search yet.</p>
+          <p class="state-empty__body">
+            Try a broader term — a course code like <strong>MTH 201</strong>,
+            or the topic itself.
+          </p>
+        </div>
+      </div>
+  
+      <div data-state="error" hidden>
+        <div class="state-error">
+          <p class="state-error__title">Couldn't load resources.</p>
+          <p class="state-error__body">Check your connection and try again.</p>
+          <button type="button" class="btn btn--primary" data-action="retry">Retry</button>
+        </div>
+      </div>
+  
+      <div data-state="data" hidden></div>
+  
+    </section>
+  </div>
+  </main>
 
-  <section id="results" aria-label="Resource results"></section>
+  <div data-widget="toast"></div>
 
-  <div class="load-more" id="load-more"></div>
-</main>
-
-<script type="module" src="./js/orchestrators/tabs/explore.js"></script>
+  <script type="module">
+    import { initExplore } from './js/orchestrators/explore.js';
+    import { mountToast } from './js/widgets/toast.js';
+    mountToast();
+    initExplore();
+  </script>
 
 </body>
 </html>
