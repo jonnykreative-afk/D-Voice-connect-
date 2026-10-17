@@ -90,3 +90,107 @@
   color: var(--color-ink-700);
   letter-spacing: 0.02em;
 }
+
+/* ---------- Catalogue data container ---------- */
+
+[data-widget="catalogue"] [data-state="data"] {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* ---------- Button primitive ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  font-family: inherit;
+  transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+
+.btn--primary {
+  background: var(--color-primary-500);
+  color: #fff;
+  border-color: var(--color-primary-500);
+}
+
+.btn--primary:hover  { background: var(--color-primary-700); border-color: var(--color-primary-700); }
+.btn--primary:active { background: var(--color-primary-900); border-color: var(--color-primary-900); }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-primary-700);
+  border-color: var(--color-border);
+}
+
+.btn--ghost:hover {
+  background: var(--color-surface-100);
+  border-color: var(--color-ink-300);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ---------- Chip (filter) ---------- */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 36px;
+  padding: 0 var(--space-3);
+  background: var(--color-surface-0);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-ink-700);
+  white-space: nowrap;
+  flex: 0 0 auto;
+  transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+
+.chip:hover { border-color: var(--color-ink-300); }
+
+.chip:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+.chip[aria-pressed="true"] {
+  background: var(--color-primary-100);
+  border-color: var(--color-primary-500);
+  color: var(--color-primary-700);
+}
+
+.chip__clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary-500);
+  color: #fff;
+  font-size: 10px;
+  line-height: 1;
+  margin-left: var(--space-1);
+}
+
+/* Screen-reader label inside chips so state isn't colour-only */
+.chip__sr {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
