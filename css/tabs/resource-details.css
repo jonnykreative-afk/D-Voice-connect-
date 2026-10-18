@@ -1,0 +1,157 @@
+.detail {
+  padding: 8px 20px 24px;
+}
+
+.detail-title {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.detail-course {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.detail-code {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent);
+  font-family: 'SF Mono', Menlo, monospace;
+  letter-spacing: 0.01em;
+}
+.detail-course-title {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.detail-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.detail-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.detail-badge-type {
+  color: var(--primary);
+  background: var(--primary-soft);
+}
+.detail-badge-format {
+  color: var(--text-muted);
+  background: var(--surface-3);
+}
+.detail-badge-size {
+  color: var(--text-dim);
+  background: var(--surface-2);
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.detail-description {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+.detail-description-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.detail-meta {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-bottom: 16px;
+}
+.detail-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 6px 0;
+  font-size: 13px;
+}
+.detail-meta-row:not(:last-child) {
+  border-bottom: 1px solid var(--border);
+}
+.detail-meta-label {
+  color: var(--text-dim);
+}
+.detail-meta-value {
+  color: var(--text-muted);
+  font-weight: 500;
+  text-align: right;
+}
+
+.detail-contributor-note {
+  font-size: 13px;
+  color: var(--text-dim);
+  font-style: italic;
+  padding: 12px;
+  background: var(--surface);
+  border-left: 2px solid var(--border-strong);
+  border-radius: 4px;
+}
+
+.detail-open-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--primary);
+  transition: background 0.15s;
+  border-radius: 10px;
+}
+.detail-open-page:active { background: var(--primary-soft); }
+
+/* Full page header */
+.resource-page-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--header-height);
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(10, 14, 26, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.resource-page-header-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.resource-page-content {
+  padding-top: 8px;
+}

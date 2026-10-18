@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0A0E1A" />
+<title>Resource — D'voice</title>
+
+<link rel="stylesheet" href="css/core.css" />
+<link rel="stylesheet" href="css/components/cards.css" />
+<link rel="stylesheet" href="css/components/interactive.css" />
+<link rel="stylesheet" href="css/components/layout.css" />
+<link rel="stylesheet" href="css/widgets/header.css" />
+<link rel="stylesheet" href="css/widgets/toast.css" />
+<link rel="stylesheet" href="css/widgets/states.css" />
+<link rel="stylesheet" href="css/tabs/resource-detail.css" />
+
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+<div class="app">
+
+  <!-- ===== HEADER ===== -->
+  <header class="resource-page-header">
+    <button class="btn-icon" id="resource-back" aria-label="Back">
+      <i class="ri-arrow-left-s-line"></i>
+    </button>
+    <span class="resource-page-header-title">Resource</span>
+    <div style="width:40px"></div>
+  </header>
+
+  <!-- ===== CONTENT ===== -->
+  <div class="resource-page-content">
+
+    <!-- Stateful container -->
+    <div class="state-container" data-state="resource-page-content">
+      
+      <!-- Loading: skeleton -->
+      <div class="state-loading">
+        <div class="detail">
+          <div class="skeleton skeleton-title"></div>
+          <div class="skeleton skeleton-course"></div>
+          <div style="margin-bottom:20px">
+            <span class="skeleton skeleton-badge"></span>
+            <span class="skeleton skeleton-badge"></span>
+            <span class="skeleton skeleton-badge"></span>
+          </div>
+          <div class="skeleton skeleton-primary"></div>
+          <div style="display:flex;gap:8px;margin-bottom:24px">
+            <div class="skeleton skeleton-action"></div>
+            <div class="skeleton skeleton-action"></div>
+          </div>
+          <div class="skeleton skeleton-line"></div>
+          <div class="skeleton skeleton-line short"></div>
+          <div class="skeleton skeleton-line"></div>
+        </div>
+      </div>
+
+      <!-- Empty: invalid or missing ID -->
+      <div class="state-empty" hidden>
+        <div class="empty-state">
+          <i class="ri-error-warning-line"></i>
+          <h2>Invalid link</h2>
+          <p>This resource link is missing or invalid.</p>
+          <a href="index.html#explore" class="btn-primary" style="max-width:200px;margin:16px auto 0;text-decoration:none;display:flex">
+            <span>Browse Explore</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Error: fetch failed or not found -->
+      <div class="state-error" hidden>
+        <div class="empty-state">
+          <i class="ri-error-warning-line"></i>
+          <h2>Resource not found</h2>
+          <p>This resource may have been removed or the link is invalid.</p>
+          <a href="index.html#explore" class="btn-primary" style="max-width:200px;margin:16px auto 0;text-decoration:none;display:flex">
+            <span>Browse Explore</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Data: JS populates -->
+      <div class="state-data" hidden></div>
+
+    </div>
+
+  </div>
+
+  <!-- ===== TOAST ===== -->
+  <div class="toast" id="toast">
+    <span id="toast-message"></span>
+    <button class="toast-action" id="toast-action">Undo</button>
+  </div>
+
+</div>
+
+<script type="module" src="js/pages/resource.js"></script>
+</body>
+</html>

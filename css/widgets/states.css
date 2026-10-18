@@ -1,0 +1,62 @@
+/* ========== SKELETON ========== */
+.skeleton {
+  background: linear-gradient(90deg, var(--surface) 0%, var(--surface-2) 50%, var(--surface) 100%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s infinite;
+  border-radius: 6px;
+}
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeleton-title { height: 28px; width: 85%; margin-bottom: 12px; }
+.skeleton-course { height: 18px; width: 60%; margin-bottom: 20px; }
+.skeleton-badge { height: 22px; width: 80px; display: inline-block; margin-right: 8px; }
+.skeleton-primary { height: 52px; width: 100%; margin-bottom: 12px; border-radius: var(--radius); }
+.skeleton-action { height: 44px; flex: 1; border-radius: var(--radius); }
+.skeleton-line { height: 14px; width: 100%; margin-bottom: 8px; }
+.skeleton-line.short { width: 70%; }
+
+/* ========== PLACEHOLDER / EMPTY ========== */
+.placeholder {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--text-muted);
+}
+.placeholder i {
+  font-size: 40px;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+  display: block;
+}
+.placeholder h2 {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.placeholder p { font-size: 13px; }
+
+.empty-state {
+  padding: 60px 20px;
+  text-align: center;
+}
+.empty-state i {
+  font-size: 48px;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+  display: block;
+}
+.empty-state h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.empty-state p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}

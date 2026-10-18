@@ -1,0 +1,199 @@
+/* ========== CHIPS (Faculty + Filter) ========== */
+.chip {
+  flex: 0 0 auto;
+  padding: 10px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.chip:active { background: var(--surface-2); }
+.chip i { font-size: 16px; color: var(--primary); }
+
+.chip.filter {
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.chip.filter:active { background: var(--surface-2); }
+.chip.filter.active {
+  background: var(--primary-soft);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+.chip.filter i { font-size: 14px; }
+.chip.filter .clear {
+  font-size: 12px;
+  margin-left: 2px;
+  opacity: 0.7;
+}
+
+/* ========== BUTTONS ========== */
+.btn-primary {
+  width: 100%;
+  height: 52px;
+  background: var(--primary);
+  border-radius: var(--radius);
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.15s, transform 0.1s;
+}
+.btn-primary:active {
+  background: #5A7AE8;
+  transform: scale(0.98);
+}
+.btn-primary i { font-size: 18px; }
+
+.btn-secondary {
+  flex: 1;
+  height: 44px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.15s;
+}
+.btn-secondary:active {
+  background: var(--surface-2);
+  border-color: var(--border-strong);
+}
+.btn-secondary i { font-size: 16px; }
+.btn-secondary.saved {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--primary);
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+.btn-text:active { background: var(--primary-soft); }
+
+.btn-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: grid; place-items: center;
+  color: var(--text-muted);
+  font-size: 20px;
+  transition: background 0.15s, color 0.15s;
+}
+.btn-icon:active { background: var(--surface-2); color: var(--text); }
+
+.btn-load-more {
+  padding: 12px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary);
+  transition: all 0.15s;
+}
+.btn-load-more:active { background: var(--surface-2); border-color: var(--primary); }
+
+/* ========== SEARCH ========== */
+.search-field {
+  position: relative;
+  margin-bottom: 28px;
+}
+.search-field i {
+  position: absolute;
+  left: 14px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-dim);
+  font-size: 18px;
+}
+.search-field input {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px 0 44px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 15px;
+  transition: border-color 0.15s, background 0.15s;
+}
+.search-field input::placeholder { color: var(--text-dim); }
+.search-field input:focus {
+  border-color: var(--primary);
+  background: var(--surface-2);
+}
+
+/* ========== INPUTS & SELECTS ========== */
+.input-field {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 15px;
+  transition: border-color 0.15s, background 0.15s;
+}
+.input-field:focus {
+  border-color: var(--primary);
+  background: var(--surface-2);
+}
+.input-field[readonly] {
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.select-field {
+  width: 100%;
+  height: 48px;
+  padding: 0 40px 0 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 15px;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.select-field:focus {
+  border-color: var(--primary);
+  background: var(--surface-2);
+  outline: none;
+}
+.select-field:active { background: var(--surface-2); }
+
+.select-wrapper {
+  position: relative;
+}
+.select-wrapper i {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 18px;
+  pointer-events: none;
+}

@@ -1,0 +1,13 @@
+.home { padding: 20px 20px 0; }
+
+.greeting { margin-bottom: 20px; }
+.greeting-hi {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+.greeting-name {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}

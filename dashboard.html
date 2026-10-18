@@ -1,239 +1,549 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>D'voice</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="./styles/index.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0A0E1A" />
+<title>D'voice</title>
+
+<link rel="stylesheet" href="css/core.css" />
+<link rel="stylesheet" href="css/components/cards.css" />
+<link rel="stylesheet" href="css/components/interactive.css" />
+<link rel="stylesheet" href="css/components/layout.css" />
+<link rel="stylesheet" href="css/widgets/header.css" />
+<link rel="stylesheet" href="css/widgets/nav.css" />
+<link rel="stylesheet" href="css/widgets/sheet.css" />
+<link rel="stylesheet" href="css/widgets/toast.css" />
+<link rel="stylesheet" href="css/widgets/states.css" />
+<link rel="stylesheet" href="css/tabs/home.css" />
+<link rel="stylesheet" href="css/tabs/explore.css" />
+<link rel="stylesheet" href="css/tabs/library.css" />
+<link rel="stylesheet" href="css/tabs/profile.css" />
+
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
-<body class="has-tab-shell">
 
-  <div class="app-shell">
-    <header class="app-header">
-      <div class="app-header-inner">
-        <a href="#tab-home" class="app-logo" data-switch-tab="tab-home">D'voice</a>
-      </div>
-    </header>
+<body>
+<div class="app">
 
-    <div class="app-body">
-
-      <!-- ============= HOME ============= -->
-      <main class="tab-content" id="tab-home" data-tab-panel="tab-home">
-        <div class="home-page">
-          <header class="home-page__greeting">
-            <p class="home-page__hello">Hi there.</p>
-            <h1 class="home-page__title">What are you studying today?</h1>
-            <div class="home-search">
-              <label for="home-search-input" class="sr-only">Search resources</label>
-              <input id="home-search-input" type="search" data-widget="home-search"
-                     placeholder="Search by course code, title, or topic"
-                     autocomplete="off" inputmode="search">
-            </div>
-          </header>
-
-          <section class="home-section" data-section="featured" hidden>
-            <header class="home-section__header">
-              <h2 class="home-section__title">Start here</h2>
-            </header>
-            <div class="catalogue-skeleton">
-              <div class="skeleton skeleton-block"></div>
-              <div class="skeleton skeleton-block"></div>
-            </div>
-          </section>
-
-          <section class="home-section" data-section="recent" data-state="loading">
-            <header class="home-section__header">
-              <h2 class="home-section__title">Recently added</h2>
-            </header>
-            <div data-state="loading">
-              <div class="catalogue-skeleton"><div class="skeleton skeleton-block"></div></div>
-            </div>
-            <div data-state="empty" hidden></div>
-            <div data-state="error" hidden></div>
-            <div data-state="data" hidden></div>
-          </section>
-
-          <section class="home-section" data-section="faculties">
-            <header class="home-section__header">
-              <h2 class="home-section__title">Browse by faculty</h2>
-            </header>
-            <div class="home-faculties" data-widget="faculties"></div>
-          </section>
-
-          <section class="home-section" data-section="news" data-state="loading">
-            <header class="home-section__header">
-              <h2 class="home-section__title">Campus news</h2>
-            </header>
-            <div data-state="loading">
-              <div class="catalogue-skeleton"><div class="skeleton skeleton-block"></div></div>
-            </div>
-            <div data-state="empty" hidden></div>
-            <div data-state="error" hidden></div>
-            <div data-state="data" hidden></div>
-          </section>
-
-          <footer class="home-community">
-            <a class="home-community__link" href="#">Join the WhatsApp community (optional)</a>
-          </footer>
-        </div>
-      </main>
-
-      <!-- ============= EXPLORE ============= -->
-      <main class="tab-content" id="tab-explore" data-tab-panel="tab-explore">
-        <div class="explore-page">
-          <header class="explore-header">
-            <h1 class="explore-title">Explore</h1>
-            <div class="explore-search">
-              <label for="explore-search-input" class="sr-only">Search resources</label>
-              <input id="explore-search-input" type="search" data-widget="search-input"
-                     placeholder="Search by course code, title, or topic"
-                     autocomplete="off" inputmode="search">
-            </div>
-            <div class="explore-filters" data-widget="filters" aria-label="Filters"></div>
-            <p class="explore-result-summary" data-widget="result-summary" aria-live="polite"></p>
-          </header>
-
-          <section data-widget="catalogue" data-current-state="loading">
-            <div data-state="loading">
-              <div class="catalogue-skeleton">
-                <div class="skeleton skeleton-block"></div>
-                <div class="skeleton skeleton-block"></div>
-                <div class="skeleton skeleton-block"></div>
-              </div>
-            </div>
-            <div data-state="empty" hidden>
-              <div class="state-empty">
-                <p class="state-empty__title">Nothing matches that search yet.</p>
-                <p class="state-empty__body">Try a broader term — a course code like <strong>MTH 201</strong>, or the topic itself.</p>
-              </div>
-            </div>
-            <div data-state="error" hidden>
-              <div class="state-error">
-                <p class="state-error__title">Couldn't load resources.</p>
-                <p class="state-error__body">Check your connection and try again.</p>
-                <button type="button" class="btn btn--primary" data-action="retry">Retry</button>
-              </div>
-            </div>
-            <div data-state="data" hidden></div>
-          </section>
-        </div>
-      </main>
-
-      <!-- ============= LIBRARY ============= -->
-      <main class="tab-content" id="tab-library" data-tab-panel="tab-library">
-        <div class="library-page">
-          <header class="library-header">
-            <h1 class="library-title">My Library</h1>
-            <div class="library-search">
-              <label for="library-search-input" class="sr-only">Search saved resources</label>
-              <input id="library-search-input" type="search" data-widget="library-search"
-                     placeholder="Search saved resources"
-                     autocomplete="off" inputmode="search">
-            </div>
-            <div class="library-sort" role="group" aria-label="Sort saved resources">
-              <button type="button" class="library-sort__btn is-active" data-sort="recent" aria-pressed="true">Recently saved</button>
-              <button type="button" class="library-sort__btn" data-sort="title" aria-pressed="false">Title A–Z</button>
-            </div>
-          </header>
-
-          <section data-widget="saved-list" data-current-state="loading">
-            <div data-state="loading">
-              <div class="catalogue-skeleton">
-                <div class="skeleton skeleton-block"></div>
-                <div class="skeleton skeleton-block"></div>
-              </div>
-            </div>
-            <div data-state="empty" hidden></div>
-            <div data-state="error" hidden>
-              <div class="state-error">
-                <p class="state-error__title">Couldn't load your library.</p>
-                <p class="state-error__body">Check your connection and try again.</p>
-                <button type="button" class="btn btn--primary" data-action="retry">Retry</button>
-              </div>
-            </div>
-            <div data-state="data" hidden></div>
-          </section>
-        </div>
-      </main>
-
-      <!-- ============= PROFILE ============= -->
-      <main class="tab-content" id="tab-profile" data-tab-panel="tab-profile">
-        <div class="profile-page">
-          <h1 class="profile-title">Profile</h1>
-
-          <section class="profile-section">
-            <h2 class="profile-section__title">Your context</h2>
-            <div class="profile-field" data-field="faculty">
-              <span class="profile-field__label">Faculty</span>
-              <div class="profile-field__control">
-                <span class="profile-field__value" data-value>—</span>
-                <button type="button" class="profile-field__edit" data-action="edit-field" data-field="faculty">Edit</button>
-              </div>
-            </div>
-            <div class="profile-field" data-field="level">
-              <span class="profile-field__label">Level</span>
-              <div class="profile-field__control">
-                <span class="profile-field__value" data-value>—</span>
-                <button type="button" class="profile-field__edit" data-action="edit-field" data-field="level">Edit</button>
-              </div>
-            </div>
-          </section>
-
-          <section class="profile-section">
-            <h2 class="profile-section__title">Account</h2>
-            <div class="profile-field" data-field="name">
-              <span class="profile-field__label">Name</span>
-              <div class="profile-field__control">
-                <span class="profile-field__value" data-value>—</span>
-                <button type="button" class="profile-field__edit" data-action="edit-field" data-field="name">Edit</button>
-              </div>
-            </div>
-            <div class="profile-field" data-field="email">
-              <span class="profile-field__label">Email</span>
-              <div class="profile-field__control">
-                <span class="profile-field__value" data-value>—</span>
-                <span class="profile-field__note">Read-only</span>
-              </div>
-            </div>
-            <button type="button" class="btn btn--ghost profile-signout" data-action="sign-out">Sign out</button>
-          </section>
-
-          <section class="profile-section">
-            <h2 class="profile-section__title">Community</h2>
-            <a class="profile-community-link" href="#">Join the WhatsApp community (optional)</a>
-          </section>
-
-          <section class="profile-section profile-section--danger">
-            <button type="button" class="profile-delete" data-action="delete-account">Delete account</button>
-          </section>
-        </div>
-      </main>
-
+  <!-- ===== HEADER ===== -->
+  <header class="top-bar">
+    <div class="brand">
+      <div class="brand-dot">D</div>
+      <span>D'voice</span>
     </div>
+    <div class="top-bar-actions">
+      <button class="btn-icon" aria-label="Notifications">
+        <i class="ri-notification-3-line"></i>
+      </button>
+    </div>
+  </header>
 
-    <nav class="app-nav" aria-label="Primary">
-      <a href="#tab-home"    class="nav-item" data-tab="tab-home">
-        <i class="fas fa-house" aria-hidden="true"></i>
-        <span class="nav-label">Home</span>
-      </a>
-      <a href="#tab-explore" class="nav-item" data-tab="tab-explore">
-        <i class="fas fa-compass" aria-hidden="true"></i>
-        <span class="nav-label">Explore</span>
-      </a>
-      <a href="#tab-library" class="nav-item" data-tab="tab-library">
-        <i class="fas fa-bookmark" aria-hidden="true"></i>
-        <span class="nav-label">Library</span>
-      </a>
-      <a href="#tab-profile" class="nav-item" data-tab="tab-profile">
-        <i class="fas fa-user" aria-hidden="true"></i>
-        <span class="nav-label">Profile</span>
-      </a>
-    </nav>
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="content">
+
+    <!-- ========== HOME ========== -->
+    <section class="view view-home active" data-view="home">
+      <div class="home">
+
+        <!-- Static: greeting + search (always visible) -->
+        <div class="greeting">
+          <div class="greeting-hi" id="greeting">Good evening</div>
+          <div class="greeting-name">Imtiaz 👋</div>
+        </div>
+
+        <div class="search-field">
+          <i class="ri-search-line"></i>
+          <input type="text" id="home-search" placeholder="Search by course code, title, or topic" aria-label="Search resources" />
+        </div>
+
+        <!-- Stateful container -->
+        <div class="state-container" data-state="home-content">
+          
+          <!-- Loading: section-level skeletons -->
+          <div class="state-loading">
+            <div class="section">
+              <div class="skeleton" style="height:20px;width:100px;margin-bottom:12px"></div>
+              <div class="scroll-row">
+                <div class="skeleton" style="flex:0 0 260px;height:150px;border-radius:20px"></div>
+                <div class="skeleton" style="flex:0 0 260px;height:150px;border-radius:20px"></div>
+              </div>
+            </div>
+            <div class="section">
+              <div class="skeleton" style="height:20px;width:120px;margin-bottom:12px"></div>
+              <div class="scroll-strip">
+                <div class="skeleton" style="flex:0 0 180px;height:140px;border-radius:14px"></div>
+                <div class="skeleton" style="flex:0 0 180px;height:140px;border-radius:14px"></div>
+                <div class="skeleton" style="flex:0 0 180px;height:140px;border-radius:14px"></div>
+              </div>
+            </div>
+            <div class="section">
+              <div class="skeleton" style="height:20px;width:140px;margin-bottom:12px"></div>
+              <div class="scroll-row">
+                <div class="skeleton" style="flex:0 0 100px;height:40px;border-radius:12px"></div>
+                <div class="skeleton" style="flex:0 0 100px;height:40px;border-radius:12px"></div>
+                <div class="skeleton" style="flex:0 0 100px;height:40px;border-radius:12px"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Empty: catalogue empty (rare) -->
+          <div class="state-empty" hidden>
+            <div class="empty-state">
+              <i class="ri-book-open-line"></i>
+              <h2>No resources yet</h2>
+              <p>The catalogue is being populated. Check back soon.</p>
+            </div>
+          </div>
+
+          <!-- Error -->
+          <div class="state-error" hidden>
+            <div class="empty-state">
+              <i class="ri-error-warning-line"></i>
+              <h2>Something went wrong</h2>
+              <p>We couldn't load the content. Please try again.</p>
+              <button class="btn-primary" data-retry="home-content" style="max-width:200px;margin:16px auto 0">
+                <i class="ri-refresh-line"></i>
+                <span>Retry</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Data: JS populates -->
+          <div class="state-data" hidden></div>
+
+        </div>
+
+        <!-- Static: community link (always visible) -->
+        <a href="#" class="community-link">
+          <i class="ri-whatsapp-line"></i>
+          <div class="community-text">
+            <div class="community-title">Join the D'voice community</div>
+            <div class="community-sub">Chat with students, share resources</div>
+          </div>
+          <i class="ri-arrow-right-s-line"></i>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- ========== EXPLORE ========== -->
+    <section class="view view-explore" data-view="explore">
+      <div class="explore">
+
+        <!-- Static: title + search + filters -->
+        <h1 class="explore-title">Explore</h1>
+
+        <div class="search-field">
+          <i class="ri-search-line"></i>
+          <input type="text" id="explore-search" placeholder="Search by course code, title, or topic" aria-label="Search resources" />
+        </div>
+
+        <div class="scroll-row" id="filter-row" style="margin:0;padding:0 0 12px 0;gap:8px">
+          <!-- JS populates filter chips -->
+        </div>
+
+        <div class="result-summary" id="result-summary"></div>
+
+        <!-- Stateful container -->
+        <div class="state-container" data-state="explore-content">
+          
+          <!-- Loading: skeleton cards -->
+          <div class="state-loading">
+            <div class="vertical-list">
+              <div class="list-card">
+                <div class="card-header">
+                  <div class="skeleton" style="width:80px;height:22px"></div>
+                  <div class="skeleton" style="width:50px;height:22px"></div>
+                </div>
+                <div class="skeleton" style="height:20px;width:90%;margin-bottom:8px"></div>
+                <div class="skeleton" style="height:16px;width:60%;margin-bottom:8px"></div>
+                <div class="skeleton" style="height:14px;width:70%"></div>
+              </div>
+              <div class="list-card">
+                <div class="card-header">
+                  <div class="skeleton" style="width:80px;height:22px"></div>
+                  <div class="skeleton" style="width:50px;height:22px"></div>
+                </div>
+                <div class="skeleton" style="height:20px;width:85%;margin-bottom:8px"></div>
+                <div class="skeleton" style="height:16px;width:55%;margin-bottom:8px"></div>
+                <div class="skeleton" style="height:14px;width:65%"></div>
+              </div>
+              <div class="list-card">
+                <div class="card-header">
+                  <div class="skeleton" style="width:80px;height:22px"></div>
+                  <div class="skeleton" style="width:50px;height:22px"></div>
+                </div>
+                <div class="skeleton" style="height:20px;width:80%;margin-bottom:8px"></div>
+                <div class="skeleton" style="height:16px;width:50%;margin-bottom:8px"></div>
+                <div class="skeleton" style="height:14px;width:60%"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Empty: no results -->
+          <div class="state-empty" hidden>
+            <div class="empty-state">
+              <i class="ri-search-line"></i>
+              <h2>No resources found</h2>
+              <p>Try adjusting your search or filters to find what you're looking for.</p>
+              <button class="btn-primary" data-clear-filters style="max-width:200px;margin:16px auto 0">
+                <span>Clear filters</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Error -->
+          <div class="state-error" hidden>
+            <div class="empty-state">
+              <i class="ri-error-warning-line"></i>
+              <h2>Couldn't load resources</h2>
+              <p>Check your connection and try again.</p>
+              <button class="btn-primary" data-retry="explore-content" style="max-width:200px;margin:16px auto 0">
+                <i class="ri-refresh-line"></i>
+                <span>Retry</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Data: JS populates resource list -->
+          <div class="state-data" hidden>
+            <div class="vertical-list" id="resource-list"></div>
+          </div>
+
+        </div>
+
+        <!-- Load more (outside state container, controlled by JS) -->
+        <div class="load-more-container" id="load-more-container" hidden>
+          <button class="btn-load-more" id="load-more-btn">Load more</button>
+        </div>
+
+        <div class="end-of-list" id="end-of-list" hidden>
+          <span>You've reached the end</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== LIBRARY ========== -->
+    <section class="view view-library" data-view="library">
+      <div class="library">
+
+        <!-- Static: title + search + controls -->
+        <h1 class="library-title">My Library</h1>
+
+        <div class="search-field">
+          <i class="ri-search-line"></i>
+          <input type="text" id="library-search" placeholder="Search your saved resources" aria-label="Search saved resources" />
+        </div>
+
+        <div class="library-controls">
+          <div class="library-count" id="library-count"></div>
+          <div class="sort-dropdown">
+            <button class="sort-btn" id="sort-btn">
+              <span id="sort-label">Recently saved</span>
+              <i class="ri-arrow-down-s-line"></i>
+            </button>
+            <div class="sort-menu" id="sort-menu">
+              <button class="sort-option active" data-sort="recent">Recently saved</button>
+              <button class="sort-option" data-sort="title">Title A–Z</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stateful container -->
+        <div class="state-container" data-state="library-content">
+          
+          <!-- Loading: skeleton cards -->
+          <div class="state-loading">
+            <div class="vertical-list">
+              <div class="list-card">
+                <div class="card-header">
+                  <div class="skeleton" style="width:80px;height:22px"></div>
+                  <div class="skeleton" style="width:50px;height:22px"></div>
+                  <div class="skeleton" style="width:32px;height:32px;border-radius:8px;margin-left:auto"></div>
+                </div>
+                <div class="skeleton" style="height:20px;width:90%;margin-bottom:8px"></div>
+                <div class="skeleton" style="height:16px;width:60%;margin-bottom:8px"></div>
+                <div class="skeleton" style="height:14px;width:70%"></div>
+              </div>
+              <div class="list-card">
+                <div class="card-header">
+                  <div class="skeleton" style="width:80px;height:22px"></div>
+                  <div class="skeleton" style="width:50px;height:22px"></div>
+                  <div class="skeleton" style="width:32px;height:32px;border-radius:8px;margin-left:auto"></div>
+                </div>
+                <div class="skeleton" style="height:20px;width:85%;margin-bottom:8px"></div>
+                <div class="skeleton" style="height:16px;width:55%;margin-bottom:8px"></div>
+                <div class="skeleton" style="height:14px;width:65%"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Empty: never saved anything OR no search results -->
+          <div class="state-empty" hidden>
+            <div class="empty-state" id="library-empty-state">
+              <i class="ri-bookmark-line"></i>
+              <h2>Your library is empty</h2>
+              <p>Save resources from Explore to find them here later.</p>
+              <button class="btn-primary" data-nav="explore" style="max-width:200px;margin:16px auto 0">
+                <span>Browse Explore</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Error -->
+          <div class="state-error" hidden>
+            <div class="empty-state">
+              <i class="ri-error-warning-line"></i>
+              <h2>Couldn't load your library</h2>
+              <p>Check your connection and try again.</p>
+              <button class="btn-primary" data-retry="library-content" style="max-width:200px;margin:16px auto 0">
+                <i class="ri-refresh-line"></i>
+                <span>Retry</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Data: JS populates -->
+          <div class="state-data" hidden>
+            <div class="vertical-list" id="library-list"></div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== PROFILE ========== -->
+    <section class="view view-profile" data-view="profile">
+      <div class="profile">
+
+        <!-- Static: title -->
+        <h1 class="profile-title">Profile</h1>
+
+        <!-- Stateful container -->
+        <div class="state-container" data-state="profile-content">
+          
+          <!-- Loading: skeleton form -->
+          <div class="state-loading">
+            <div class="profile-section">
+              <div class="skeleton" style="height:16px;width:100px;margin-bottom:16px"></div>
+              <div class="profile-field">
+                <div class="skeleton" style="height:14px;width:60px;margin-bottom:8px"></div>
+                <div class="skeleton" style="height:48px;width:100%;border-radius:14px"></div>
+              </div>
+              <div class="profile-field">
+                <div class="skeleton" style="height:14px;width:50px;margin-bottom:8px"></div>
+                <div class="skeleton" style="height:48px;width:100%;border-radius:14px"></div>
+              </div>
+            </div>
+            <div class="profile-section">
+              <div class="skeleton" style="height:16px;width:80px;margin-bottom:16px"></div>
+              <div class="profile-field">
+                <div class="skeleton" style="height:14px;width:50px;margin-bottom:8px"></div>
+                <div class="skeleton" style="height:48px;width:100%;border-radius:14px"></div>
+              </div>
+              <div class="profile-field">
+                <div class="skeleton" style="height:14px;width:60px;margin-bottom:8px"></div>
+                <div class="skeleton" style="height:48px;width:100%;border-radius:14px"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Empty: not used for profile, but exists for pattern -->
+          <div class="state-empty" hidden></div>
+
+          <!-- Error -->
+          <div class="state-error" hidden>
+            <div class="empty-state">
+              <i class="ri-error-warning-line"></i>
+              <h2>Couldn't load your profile</h2>
+              <p>Check your connection and try again.</p>
+              <button class="btn-primary" data-retry="profile-content" style="max-width:200px;margin:16px auto 0">
+                <i class="ri-refresh-line"></i>
+                <span>Retry</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Data: JS populates form -->
+          <div class="state-data" hidden>
+            
+            <!-- Your context -->
+            <div class="profile-section">
+              <h2 class="profile-section-title">Your context</h2>
+              <p class="profile-section-desc">This shapes what you see on Home and Explore</p>
+              
+              <div class="profile-field">
+                <label class="profile-label" for="profile-faculty">Faculty</label>
+                <div class="select-wrapper">
+                  <select id="profile-faculty" class="select-field">
+                    <option value="Science">Science</option>
+                    <option value="Engineering">Engineering</option>
+                    <option value="Arts">Arts</option>
+                    <option value="Social Sciences">Social Sciences</option>
+                    <option value="Health Sciences">Health Sciences</option>
+                    <option value="Law">Law</option>
+                  </select>
+                  <i class="ri-arrow-down-s-line"></i>
+                </div>
+              </div>
+
+              <div class="profile-field">
+                <label class="profile-label" for="profile-level">Level</label>
+                <div class="select-wrapper">
+                  <select id="profile-level" class="select-field">
+                    <option value="100">100 level</option>
+                    <option value="200">200 level</option>
+                    <option value="300">300 level</option>
+                    <option value="400">400 level</option>
+                    <option value="500">500 level</option>
+                  </select>
+                  <i class="ri-arrow-down-s-line"></i>
+                </div>
+              </div>
+
+              <div class="profile-save-status" id="profile-save-status"></div>
+            </div>
+
+            <!-- Account -->
+            <div class="profile-section">
+              <h2 class="profile-section-title">Account</h2>
+              
+              <div class="profile-field">
+                <label class="profile-label" for="profile-name">Name</label>
+                <input type="text" id="profile-name" class="input-field" />
+              </div>
+
+              <div class="profile-field">
+                <label class="profile-label" for="profile-email">Email</label>
+                <input type="email" id="profile-email" class="input-field" readonly />
+                <span class="profile-field-hint">Read-only in current version</span>
+              </div>
+
+              <button class="profile-signout-btn" id="profile-signout-btn">
+                <i class="ri-logout-box-r-line"></i>
+                <span>Sign out</span>
+              </button>
+            </div>
+
+            <!-- Community -->
+            <div class="profile-section">
+              <h2 class="profile-section-title">Community</h2>
+              <a href="#" class="profile-link">
+                <i class="ri-whatsapp-line"></i>
+                <span>Join WhatsApp community</span>
+                <i class="ri-external-link-line"></i>
+              </a>
+              <a href="#" class="profile-link">
+                <i class="ri-information-line"></i>
+                <span>About D'voice</span>
+                <i class="ri-external-link-line"></i>
+              </a>
+            </div>
+
+            <!-- Destructive -->
+            <div class="profile-section profile-section-destructive">
+              <button class="profile-delete-btn" id="profile-delete-btn">
+                Delete account
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== BOTTOM NAV ===== -->
+  <nav class="bottom-nav">
+    <div class="bottom-nav-inner">
+      <button class="nav-item active" data-nav="home">
+        <i class="ri-home-5-line"></i>
+        <span>Home</span>
+      </button>
+      <button class="nav-item" data-nav="explore">
+        <i class="ri-compass-3-line"></i>
+        <span>Explore</span>
+      </button>
+      <button class="nav-item" data-nav="library">
+        <i class="ri-bookmark-3-line"></i>
+        <span>Library</span>
+      </button>
+      <button class="nav-item" data-nav="profile">
+        <i class="ri-user-3-line"></i>
+        <span>Profile</span>
+      </button>
+    </div>
+  </nav>
+  
+    <!-- ===== SHEET OVERLAY ===== -->
+  <div class="sheet-overlay" id="sheet-overlay">
+    <div class="sheet" id="resource-sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <div class="sheet-content" id="sheet-content">
+        
+        <!-- Stateful container for sheet -->
+        <div class="state-container" data-state="sheet-content">
+          
+          <!-- Loading: skeleton -->
+          <div class="state-loading">
+            <div class="detail">
+              <div class="skeleton skeleton-title"></div>
+              <div class="skeleton skeleton-course"></div>
+              <div style="margin-bottom:20px">
+                <span class="skeleton skeleton-badge"></span>
+                <span class="skeleton skeleton-badge"></span>
+              </div>
+              <div class="skeleton skeleton-primary"></div>
+              <div style="display:flex;gap:8px;margin-bottom:24px">
+                <div class="skeleton skeleton-action"></div>
+                <div class="skeleton skeleton-action"></div>
+              </div>
+              <div class="skeleton skeleton-line"></div>
+              <div class="skeleton skeleton-line short"></div>
+            </div>
+          </div>
+          
+          <!-- Empty: not used for sheet -->
+          <div class="state-empty" hidden></div>
+
+          <!-- Error -->
+          <div class="state-error" hidden>
+            <div class="empty-state">
+              <i class="ri-error-warning-line"></i>
+              <h2>Couldn't load resource</h2>
+              <p>Please try again.</p>
+              <button class="btn-primary" data-retry="sheet-content" style="max-width:200px;margin:16px auto 0">
+                <i class="ri-refresh-line"></i>
+                <span>Retry</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Data: JS populates -->
+          <div class="state-data" hidden></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  
+  <!-- ===== TOAST ===== -->
+  <div class="toast" id="toast">
+    <span id="toast-message"></span>
+    <button class="toast-action" id="toast-action">Undo</button>
   </div>
 
-  <div data-widget="toast"></div>
+</div>
 
-  <script type="module" src="./js/dashboard-main.js"></script>
+<script type="module" src="js/app.js"></script>
 </body>
 </html>

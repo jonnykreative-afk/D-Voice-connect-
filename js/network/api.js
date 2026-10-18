@@ -1,4 +1,3 @@
-// ========== MOCK DATA ==========
 export const MOCK_RESOURCES = [
   { id: 1, title: 'Calculus II Past Questions 2024', code: 'MTH 201', courseTitle: 'Calculus II', type: 'Past question', format: 'PDF', faculty: 'Science', level: '200', contributor: 'Dr. Adebayo', date: '2024-10-15', downloads: 342, description: 'Comprehensive past questions from 2019-2024 with detailed solutions.', contributorNote: 'Compiled by the Mathematics Department.' },
   { id: 2, title: 'Data Structures — Week 4 Notes', code: 'CSC 205', courseTitle: 'Data Structures', type: 'Lecture note', format: 'PDF', faculty: 'Science', level: '200', contributor: 'Prof. Okafor', date: '2024-10-14', downloads: 189 },
@@ -46,10 +45,9 @@ export const MOCK_USER = {
   level: '200'
 };
 
-// ========== API FUNCTIONS ==========
 export async function fetchResources() {
   return new Promise(resolve => {
-    setTimeout(() => resolve(MOCK_RESOURCES), 300);
+    setTimeout(() => resolve([...MOCK_RESOURCES]), 300);
   });
 }
 
@@ -58,7 +56,7 @@ export async function fetchResourceById(id) {
     setTimeout(() => {
       const resource = MOCK_RESOURCES.find(r => r.id === id);
       if (resource) {
-        resolve(resource);
+        resolve({ ...resource });
       } else {
         reject(new Error('Resource not found'));
       }
@@ -68,7 +66,7 @@ export async function fetchResourceById(id) {
 
 export async function fetchUser() {
   return new Promise(resolve => {
-    setTimeout(() => resolve(MOCK_USER), 200);
+    setTimeout(() => resolve({ ...MOCK_USER }), 200);
   });
 }
 
@@ -76,12 +74,7 @@ export async function updateUser(updates) {
   return new Promise(resolve => {
     setTimeout(() => {
       Object.assign(MOCK_USER, updates);
-      resolve(MOCK_USER);
+      resolve({ ...MOCK_USER });
     }, 300);
   });
-}
-
-export function generateFileSize(id) {
-  const sizes = ['1.2 MB', '2.4 MB', '856 KB', '3.1 MB', '1.8 MB', '945 KB'];
-  return sizes[id % sizes.length];
 }

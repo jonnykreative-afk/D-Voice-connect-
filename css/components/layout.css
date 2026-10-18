@@ -1,0 +1,120 @@
+/* ========== SECTIONS ========== */
+.section { margin-bottom: 28px; }
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding: 0 2px;
+}
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.section-link {
+  font-size: 13px;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+/* ========== HORIZONTAL SCROLL CONTAINERS ========== */
+.scroll-row {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 4px;
+  margin: 0 -20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  scrollbar-width: none;
+}
+.scroll-row::-webkit-scrollbar { display: none; }
+
+.scroll-strip {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 4px;
+  margin: 0 -20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  scrollbar-width: none;
+}
+.scroll-strip::-webkit-scrollbar { display: none; }
+
+/* ========== VERTICAL LISTS ========== */
+.vertical-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ========== NEWS LIST ========== */
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.news-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 0.15s;
+}
+.news-item:active { border-color: var(--border-strong); }
+.news-item .news-icon {
+  flex: 0 0 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--surface-3);
+  display: grid; place-items: center;
+  color: var(--text-muted);
+  font-size: 16px;
+}
+.news-item .news-body { flex: 1; min-width: 0; }
+.news-item .news-title {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  margin-bottom: 2px;
+}
+.news-item .news-time {
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+/* ========== COMMUNITY LINK ========== */
+.community-link {
+  margin: 8px 0 24px;
+  padding: 14px;
+  background: var(--surface);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.community-link i:first-child {
+  font-size: 20px;
+  color: var(--accent);
+}
+.community-link .community-text { flex: 1; }
+.community-link .community-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 1px;
+}
+.community-link .community-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.community-link i:last-child {
+  color: var(--text-dim);
+  font-size: 18px;
+}

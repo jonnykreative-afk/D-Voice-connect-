@@ -1,0 +1,30 @@
+.explore {
+  padding: 20px 20px 0;
+}
+
+.explore-title {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.result-summary {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  padding: 0 2px;
+}
+
+.load-more-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.end-of-list {
+  text-align: center;
+  padding: 20px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
