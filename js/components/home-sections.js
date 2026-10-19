@@ -43,3 +43,18 @@ export function renderNewsList(newsItems) {
   
   return container;
 }
+
+export function renderGroupsLink() {
+  const link = document.createElement('a');
+  link.href = 'groups.html';
+  link.className = 'community-link';
+  link.innerHTML = `
+    <i class="ri-group-line"></i>
+    <div class="community-text">
+      <div class="community-title">Indigenous student groups</div>
+      <div class="community-sub">Find your association</div>
+    </div>
+    <i class="ri-arrow-right-s-line"></i>
+  `;
+  return link;
+}

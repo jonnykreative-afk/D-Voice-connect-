@@ -1,0 +1,58 @@
+/* ========== CTA PAIR ========== */
+/* Primary filled button + secondary text link below.
+   Use when one action is primary and the other is a real
+   alternative, not a tertiary add-on. */
+.cta-pair {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+}
+
+.cta-primary {
+  width: 100%;
+  height: 52px;
+  background: var(--primary);
+  border-radius: var(--radius);
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.15s, transform 0.1s;
+}
+.cta-primary:active {
+  background: #5A7AE8;
+  transform: scale(0.98);
+}
+.cta-primary:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.cta-primary i { font-size: 18px; }
+.cta-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.cta-secondary {
+  align-self: center;
+  min-height: 44px;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary);
+  border-radius: 10px;
+  transition: background 0.15s;
+}
+.cta-secondary:active { background: var(--primary-soft); }
+.cta-secondary:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}

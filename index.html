@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0A0E1A" />
+<title>D'voice — Student resources, campus news, and community</title>
+
+<link rel="stylesheet" href="css/core.css" />
+<link rel="stylesheet" href="css/components/cards.css" />
+<link rel="stylesheet" href="css/components/interactive.css" />
+<link rel="stylesheet" href="css/components/layout.css" />
+<link rel="stylesheet" href="css/components/cta.css" />
+<link rel="stylesheet" href="css/widgets/header.css" />
+<link rel="stylesheet" href="css/widgets/states.css" />
+<link rel="stylesheet" href="css/pages/landing.css" />
+
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+<div class="app landing-app">
+
+  <main class="landing">
+
+    <!-- ===== 1. HERO ===== -->
+    <section class="landing-hero" aria-labelledby="landing-founder">
+      <div class="landing-brand">
+        <div class="brand-dot" aria-hidden="true">D</div>
+        <span class="landing-brand-name">D'voice</span>
+      </div>
+      <p class="landing-founder" id="landing-founder">
+        D'voice was started by <strong>[Founder Name]</strong> so students could
+        find the past questions, notes and slides they need — in one place,
+        without asking around.
+      </p>
+      <h1 class="landing-h1">
+        An educational resource platform for students.
+      </h1>
+      <p class="landing-sub">
+        Real materials from real courses. Free to browse, free to download.
+      </p>
+      <div class="cta-pair">
+        <a href="dashboard.html#explore" class="cta-primary">
+          <i class="ri-compass-3-line" aria-hidden="true"></i>
+          <span>Browse resources</span>
+        </a>
+        <a href="auth.html#signup" class="cta-secondary">
+          <span>Sign up</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== 2. WHAT YOU CAN DO ===== -->
+    <section class="landing-section" aria-labelledby="landing-do-title">
+      <h2 class="landing-section-title" id="landing-do-title">What you can do</h2>
+      <div class="landing-feature-grid">
+        <div class="landing-feature">
+          <i class="ri-download-2-line" aria-hidden="true"></i>
+          <div class="landing-feature-title">Read and download</div>
+          <div class="landing-feature-desc">Past questions, notes, slides and textbooks — free to open or download. No sign-in required.</div>
+        </div>
+        <div class="landing-feature">
+          <i class="ri-bookmark-3-line" aria-hidden="true"></i>
+          <div class="landing-feature-title">Save to your library</div>
+          <div class="landing-feature-desc">Keep the resources you use most in one place. Sign in to save; browse without it.</div>
+        </div>
+        <div class="landing-feature">
+          <i class="ri-share-forward-line" aria-hidden="true"></i>
+          <div class="landing-feature-title">Share with classmates</div>
+          <div class="landing-feature-desc">Copy a link to any resource and send it to your study group.</div>
+        </div>
+        <div class="landing-feature">
+          <i class="ri-filter-3-line" aria-hidden="true"></i>
+          <div class="landing-feature-title">Find by course, faculty, level</div>
+          <div class="landing-feature-desc">Search by course code or title. Filter by faculty, level, type and format.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 3. WHAT'S INSIDE (proof + counts) ===== -->
+    <section class="landing-section" aria-labelledby="landing-proof-title">
+      <h2 class="landing-section-title" id="landing-proof-title">What's inside</h2>
+      <p class="landing-section-sub" id="landing-stats">Loading catalogue…</p>
+
+      <div class="state-container" data-state="landing-proof">
+        <div class="state-loading">
+          <div class="landing-proof-row">
+            <div class="skeleton landing-proof-skel"></div>
+            <div class="skeleton landing-proof-skel"></div>
+            <div class="skeleton landing-proof-skel"></div>
+          </div>
+        </div>
+        <div class="state-empty" hidden>
+          <p class="landing-proof-empty">Resources are being added. Check back soon.</p>
+        </div>
+        <div class="state-error" hidden>
+          <p class="landing-proof-empty">Couldn't load a preview right now.</p>
+        </div>
+        <div class="state-data" hidden></div>
+      </div>
+
+      <div class="landing-faculty" aria-label="Faculties covered">
+        <span class="landing-faculty-label">Faculties</span>
+        <div class="landing-faculty-list" id="landing-faculties"></div>
+      </div>
+    </section>
+
+    <!-- ===== 4. BEYOND RESOURCES ===== -->
+    <section class="landing-section" aria-labelledby="landing-beyond-title">
+      <h2 class="landing-section-title" id="landing-beyond-title">Beyond resources</h2>
+      <div class="landing-beyond-grid">
+        <div class="landing-beyond">
+          <div class="landing-beyond-icon"><i class="ri-newspaper-line" aria-hidden="true"></i></div>
+          <div class="landing-beyond-title">Campus news</div>
+          <div class="landing-beyond-desc">Notices, timetable updates and announcements from the departments and offices that matter.</div>
+        </div>
+        <div class="landing-beyond">
+          <div class="landing-beyond-icon"><i class="ri-group-line" aria-hidden="true"></i></div>
+          <div class="landing-beyond-title">Indigenous student groups</div>
+          <div class="landing-beyond-desc">A directory of student associations on campus, with direct links to reach them.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 5. COMMUNITY ===== -->
+    <section class="landing-section landing-community" aria-labelledby="landing-community-title">
+      <h2 class="landing-section-title" id="landing-community-title">The community</h2>
+      <p class="landing-section-sub">
+        D'voice started as one student sharing what he had with classmates.
+        The WhatsApp community is where that continues — students sharing
+        resources, asking questions, and helping each other find what they need.
+      </p>
+      <a class="community-link landing-community-card"
+         href="https://chat.whatsapp.com/xxxx"
+         target="_blank" rel="noopener noreferrer">
+        <i class="ri-whatsapp-line" aria-hidden="true"></i>
+        <div class="community-text">
+          <div class="community-title">Join the D'voice community</div>
+          <div class="community-sub">Optional — browse and download without joining.</div>
+        </div>
+        <i class="ri-arrow-right-up-line" aria-hidden="true"></i>
+      </a>
+    </section>
+
+    <!-- ===== 6. FINAL CTA ===== -->
+    <section class="landing-final" aria-label="Get started">
+      <h2 class="landing-final-title">Ready to look around?</h2>
+      <div class="cta-pair">
+        <a href="dashboard.html#explore" class="cta-primary">
+          <i class="ri-compass-3-line" aria-hidden="true"></i>
+          <span>Browse resources</span>
+        </a>
+        <a href="auth.html#signup" class="cta-secondary">
+          <span>Sign up</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== 7. FOOTER ===== -->
+    <footer class="landing-footer">
+      <a href="auth.html#signin" class="landing-footer-link">Sign in</a>
+      <span class="landing-footer-sep" aria-hidden="true">·</span>
+      <a href="mailto:hello@dvoice.app" class="landing-footer-link">Contact</a>
+      <span class="landing-footer-sep" aria-hidden="true">·</span>
+      <a href="privacy.html" class="landing-footer-link">Privacy</a>
+    </footer>
+
+  </main>
+
+</div>
+
+<script type="module" src="js/pages/landing.js"></script>
+</body>
+</html>

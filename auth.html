@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0A0E1A" />
+<title>Sign in — D'voice</title>
+
+<link rel="stylesheet" href="css/core.css" />
+<link rel="stylesheet" href="css/components/form.css" />
+<link rel="stylesheet" href="css/components/cta.css" />
+<link rel="stylesheet" href="css/widgets/header.css" />
+<link rel="stylesheet" href="css/widgets/toast.css" />
+<link rel="stylesheet" href="css/pages/auth.css" />
+
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+<div class="app auth-app">
+
+  <header class="resource-page-header">
+    <button class="btn-icon" id="auth-back" aria-label="Back">
+      <i class="ri-arrow-left-s-line"></i>
+    </button>
+    <span class="resource-page-header-title" id="auth-title">Sign in</span>
+    <div style="width:40px"></div>
+  </header>
+
+  <main class="auth">
+    <div class="auth-intro">
+      <h1 class="auth-heading" id="auth-heading">Welcome back</h1>
+      <p class="auth-sub" id="auth-sub">Sign in to save resources and open your library.</p>
+    </div>
+
+    <div class="auth-toggle" role="tablist" aria-label="Sign in or sign up">
+      <button class="auth-tab active" id="tab-signin" role="tab" aria-selected="true" aria-controls="form-signin">Sign in</button>
+      <button class="auth-tab" id="tab-signup" role="tab" aria-selected="false" aria-controls="form-signup">Sign up</button>
+    </div>
+
+    <div class="form-banner error" id="auth-banner" hidden></div>
+
+    <!-- SIGN IN -->
+    <form class="form" id="form-signin" novalidate aria-labelledby="auth-heading">
+      <div class="form-field">
+        <label class="form-label" for="signin-email">Email</label>
+        <input class="form-input" type="email" id="signin-email" name="email" autocomplete="email" required />
+        <div class="form-hint"></div>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="signin-password">Password</label>
+        <div class="pw-field" id="signin-password-slot"></div>
+        <div class="form-hint"></div>
+      </div>
+
+      <div class="cta-pair">
+        <button type="submit" class="cta-primary" id="signin-submit">Sign in</button>
+      </div>
+    </form>
+
+    <!-- SIGN UP -->
+    <form class="form" id="form-signup" novalidate aria-labelledby="auth-heading" hidden>
+      <div class="form-field">
+        <label class="form-label" for="signup-name">Name</label>
+        <input class="form-input" type="text" id="signup-name" name="name" autocomplete="name" required />
+        <div class="form-hint"></div>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="signup-email">Email</label>
+        <input class="form-input" type="email" id="signup-email" name="email" autocomplete="email" required />
+        <div class="form-hint"></div>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="signup-password">Password</label>
+        <div class="pw-field" id="signup-password-slot"></div>
+        <div class="form-hint"></div>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="signup-faculty">Faculty</label>
+        <div class="combobox">
+          <input class="form-input" type="text" id="signup-faculty" name="faculty" placeholder="Start typing your faculty…" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="faculty-menu" required />
+          <input type="hidden" id="signup-faculty-value" name="faculty-value" />
+          <div class="combobox-menu" id="faculty-menu" role="listbox" aria-label="Faculty options"></div>
+        </div>
+        <div class="form-hint"></div>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="signup-level">Level</label>
+        <div class="combobox">
+          <input class="form-input" type="text" id="signup-level" name="level" placeholder="Start typing your level…" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="level-menu" required />
+          <input type="hidden" id="signup-level-value" name="level-value" />
+          <div class="combobox-menu" id="level-menu" role="listbox" aria-label="Level options"></div>
+        </div>
+        <div class="form-hint"></div>
+      </div>
+
+      <div class="cta-pair">
+        <button type="submit" class="cta-primary" id="signup-submit">Create account</button>
+      </div>
+    </form>
+
+    <div class="form-footer">
+      <a class="form-link" id="forgot-link" href="#">Forgot password?</a>
+      <a class="form-link" id="switch-link" href="#">New here? Create an account</a>
+    </div>
+  </main>
+
+  <div class="toast" id="toast">
+    <span id="toast-message"></span>
+    <button class="toast-action" id="toast-action">Undo</button>
+  </div>
+</div>
+<script type="module" src="js/pages/auth.js"></script>
+</body>
+</html>

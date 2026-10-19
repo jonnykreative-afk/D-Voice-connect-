@@ -64,3 +64,7 @@ img { max-width: 100%; display: block; }
 .view { display: none; }
 .view.active { display: block; animation: fadeIn 0.25s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+[hidden] {
+  display: none !important;
+}
