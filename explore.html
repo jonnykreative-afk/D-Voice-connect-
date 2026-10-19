@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0A0E1A" />
+<title>Explore — D'voice</title>
+
+<link rel="stylesheet" href="css/core.css" />
+<link rel="stylesheet" href="css/components/cards.css" />
+<link rel="stylesheet" href="css/components/interactive.css" />
+<link rel="stylesheet" href="css/components/layout.css" />
+<link rel="stylesheet" href="css/components/cta.css" />
+<link rel="stylesheet" href="css/widgets/header.css" />
+<link rel="stylesheet" href="css/widgets/states.css" />
+<link rel="stylesheet" href="css/tabs/explore.css" />
+<link rel="stylesheet" href="css/pages/public-explore.css" />
+
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+<div class="app">
+
+  <header class="resource-page-header">
+    <a href="index.html" class="btn-icon" aria-label="Back to home">
+      <i class="ri-arrow-left-s-line"></i>
+    </a>
+    <span class="resource-page-header-title">Explore</span>
+    <a href="auth.html#signup" class="btn-icon" aria-label="Sign up" style="font-size:13px;font-weight:600;width:auto;padding:0 12px">
+      Sign up
+    </a>
+  </header>
+
+  <main class="content" style="padding-bottom:32px">
+    <div class="explore" style="padding-top:16px">
+
+      <div class="search-field">
+        <i class="ri-search-line"></i>
+        <input type="text" id="explore-search" placeholder="Search by course code, title, or topic" aria-label="Search resources" />
+      </div>
+
+      <div class="scroll-row" id="filter-row" style="margin:0;padding:0 0 12px 0;gap:8px"></div>
+
+      <div class="result-summary" id="result-summary"></div>
+
+      <div class="state-container" data-state="explore-content">
+        <div class="state-loading">
+          <div class="vertical-list">
+            <div class="list-card">
+              <div class="card-header">
+                <div class="skeleton" style="width:80px;height:22px"></div>
+                <div class="skeleton" style="width:50px;height:22px"></div>
+              </div>
+              <div class="skeleton" style="height:20px;width:90%;margin-bottom:8px"></div>
+              <div class="skeleton" style="height:16px;width:60%;margin-bottom:8px"></div>
+              <div class="skeleton" style="height:14px;width:70%"></div>
+            </div>
+            <div class="list-card">
+              <div class="card-header">
+                <div class="skeleton" style="width:80px;height:22px"></div>
+                <div class="skeleton" style="width:50px;height:22px"></div>
+              </div>
+              <div class="skeleton" style="height:20px;width:85%;margin-bottom:8px"></div>
+              <div class="skeleton" style="height:16px;width:55%;margin-bottom:8px"></div>
+              <div class="skeleton" style="height:14px;width:65%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="state-empty" hidden>
+          <div class="empty-state">
+            <i class="ri-search-line"></i>
+            <h2>No resources found</h2>
+            <p>Try adjusting your search or filters to find what you're looking for.</p>
+            <button class="btn-primary" data-clear-filters style="max-width:200px;margin:16px auto 0">
+              <span>Clear filters</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="state-error" hidden>
+          <div class="empty-state">
+            <i class="ri-error-warning-line"></i>
+            <h2>Couldn't load resources</h2>
+            <p>Check your connection and try again.</p>
+            <button class="btn-primary" data-retry="explore-content" style="max-width:200px;margin:16px auto 0">
+              <i class="ri-refresh-line"></i>
+              <span>Retry</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="state-data" hidden>
+          <div class="vertical-list" id="resource-list"></div>
+        </div>
+      </div>
+
+      <div class="load-more-container" id="load-more-container" hidden>
+        <button class="btn-load-more" id="load-more-btn">Load more</button>
+      </div>
+
+      <div class="end-of-list" id="end-of-list" hidden>
+        <span>You've reached the end</span>
+      </div>
+
+      <!-- Quiet sign-up prompt at the very bottom — never interrupts browsing -->
+      <div class="public-explore-signup">
+        <p>Sign up to save resources to your library.</p>
+        <div class="cta-pair" style="max-width:260px;margin:0 auto">
+          <a href="auth.html#signup" class="cta-primary">Create an account</a>
+          <a href="auth.html#signin" class="cta-secondary">Sign in</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+</div>
+
+<script type="module" src="js/pages/public-explore.js"></script>
+</body>
+</html>

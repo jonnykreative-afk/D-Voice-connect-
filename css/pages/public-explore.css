@@ -1,0 +1,11 @@
+.public-explore-signup {
+  margin-top: 40px;
+  padding: 24px 0 32px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.public-explore-signup p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
