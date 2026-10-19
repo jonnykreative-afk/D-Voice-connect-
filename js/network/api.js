@@ -49,7 +49,8 @@ export const MOCK_USER = {
   name: 'Imtiaz',
   email: 'imtiaz@student.edu.ng',
   faculty: 'Science',
-  level: '200'
+  level: '200',
+  joinedAt: '2024-09-01'
 };
 
 export const MOCK_NEWS = [
@@ -199,9 +200,12 @@ export async function fetchResourceById(id) {
   });
 }
 
-export async function fetchUser() {
+export async function fetchUser(savedResources = []) {
   return new Promise(resolve => {
-    setTimeout(() => resolve({ ...MOCK_USER }), 200);
+    setTimeout(() => resolve({
+      ...MOCK_USER,
+      savedCount: savedResources.length
+    }), 200);
   });
 }
 

@@ -324,43 +324,23 @@
     <!-- ========== PROFILE ========== -->
     <section class="view view-profile" data-view="profile">
       <div class="profile">
-
-        <!-- Static: title -->
+    
         <h1 class="profile-title">Profile</h1>
-
-        <!-- Stateful container -->
+    
         <div class="state-container" data-state="profile-content">
-          
-          <!-- Loading: skeleton form -->
+    
+          <!-- Loading -->
           <div class="state-loading">
             <div class="profile-section">
+              <div class="skeleton" style="height:72px;width:100%;border-radius:14px;margin-bottom:16px"></div>
               <div class="skeleton" style="height:16px;width:100px;margin-bottom:16px"></div>
-              <div class="profile-field">
-                <div class="skeleton" style="height:14px;width:60px;margin-bottom:8px"></div>
-                <div class="skeleton" style="height:48px;width:100%;border-radius:14px"></div>
-              </div>
-              <div class="profile-field">
-                <div class="skeleton" style="height:14px;width:50px;margin-bottom:8px"></div>
-                <div class="skeleton" style="height:48px;width:100%;border-radius:14px"></div>
-              </div>
-            </div>
-            <div class="profile-section">
-              <div class="skeleton" style="height:16px;width:80px;margin-bottom:16px"></div>
-              <div class="profile-field">
-                <div class="skeleton" style="height:14px;width:50px;margin-bottom:8px"></div>
-                <div class="skeleton" style="height:48px;width:100%;border-radius:14px"></div>
-              </div>
-              <div class="profile-field">
-                <div class="skeleton" style="height:14px;width:60px;margin-bottom:8px"></div>
-                <div class="skeleton" style="height:48px;width:100%;border-radius:14px"></div>
-              </div>
+              <div class="skeleton" style="height:48px;width:100%;border-radius:14px;margin-bottom:12px"></div>
+              <div class="skeleton" style="height:48px;width:100%;border-radius:14px"></div>
             </div>
           </div>
-
-          <!-- Empty: not used for profile, but exists for pattern -->
+    
           <div class="state-empty" hidden></div>
-
-          <!-- Error -->
+    
           <div class="state-error" hidden>
             <div class="empty-state">
               <i class="ri-error-warning-line"></i>
@@ -372,15 +352,21 @@
               </button>
             </div>
           </div>
-
-          <!-- Data: JS populates form -->
+    
           <div class="state-data" hidden>
-            
-            <!-- Your context -->
+    
+            <!-- ===== 1. IDENTITY + FOOTPRINT ===== -->
+            <div class="profile-identity">
+              <div class="profile-identity-name" id="profile-identity-name">—</div>
+              <div class="profile-identity-meta" id="profile-identity-meta"></div>
+              <div class="profile-identity-footprint" id="profile-identity-footprint"></div>
+            </div>
+    
+            <!-- ===== 2. YOUR CONTEXT ===== -->
             <div class="profile-section">
               <h2 class="profile-section-title">Your context</h2>
-              <p class="profile-section-desc">This shapes what you see on Home and Explore</p>
-              
+              <p class="profile-section-desc">Your resources are matched to this. Change it if your faculty or level changes.</p>
+    
               <div class="profile-field">
                 <label class="profile-label" for="profile-faculty">Faculty</label>
                 <div class="select-wrapper">
@@ -395,7 +381,7 @@
                   <i class="ri-arrow-down-s-line"></i>
                 </div>
               </div>
-
+    
               <div class="profile-field">
                 <label class="profile-label" for="profile-level">Level</label>
                 <div class="select-wrapper">
@@ -409,57 +395,81 @@
                   <i class="ri-arrow-down-s-line"></i>
                 </div>
               </div>
-
+    
+              <div class="profile-consequence" id="profile-consequence" hidden></div>
               <div class="profile-save-status" id="profile-save-status"></div>
             </div>
-
-            <!-- Account -->
+    
+            <!-- ===== 3. ABOUT D'VOICE ===== -->
+            <div class="profile-section">
+              <h2 class="profile-section-title">About D'voice</h2>
+              <p class="profile-about-line">
+                D'voice was started by <strong>[Founder Name]</strong> so students
+                could find the past questions, notes and slides they need — in one
+                place, without asking around.
+              </p>
+              <p class="profile-section-desc" style="margin-top:8px">
+                The WhatsApp community is where that continues.
+              </p>
+    
+              <a href="https://chat.whatsapp.com/xxxx" target="_blank" rel="noopener noreferrer" class="profile-link">
+                <i class="ri-whatsapp-line"></i>
+                <span>Join the D'voice community</span>
+                <i class="ri-arrow-right-up-line"></i>
+              </a>
+              <a href="about.html" class="profile-link">
+                <i class="ri-information-line"></i>
+                <span>About D'voice</span>
+                <i class="ri-external-link-line"></i>
+              </a>
+              <a href="mailto:hello@dvoice.app" class="profile-link">
+                <i class="ri-lifebuoy-line"></i>
+                <span>Help &amp; support</span>
+                <i class="ri-arrow-right-s-line"></i>
+              </a>
+              <a href="privacy.html" class="profile-link">
+                <i class="ri-shield-check-line"></i>
+                <span>Privacy</span>
+                <i class="ri-arrow-right-s-line"></i>
+              </a>
+            </div>
+    
+            <!-- ===== 4. ACCOUNT ===== -->
             <div class="profile-section">
               <h2 class="profile-section-title">Account</h2>
-              
+    
               <div class="profile-field">
                 <label class="profile-label" for="profile-name">Name</label>
                 <input type="text" id="profile-name" class="input-field" />
               </div>
-
+    
               <div class="profile-field">
                 <label class="profile-label" for="profile-email">Email</label>
                 <input type="email" id="profile-email" class="input-field" readonly />
-                <span class="profile-field-hint">Read-only in current version</span>
+                <span class="profile-field-hint">Contact support to change your email</span>
               </div>
-
+    
+              <a href="auth.html#reset" class="profile-link">
+                <i class="ri-lock-password-line"></i>
+                <span>Change password</span>
+                <i class="ri-arrow-right-s-line"></i>
+              </a>
+    
               <button class="profile-signout-btn" id="profile-signout-btn">
                 <i class="ri-logout-box-r-line"></i>
                 <span>Sign out</span>
               </button>
             </div>
-
-            <!-- Community -->
-            <div class="profile-section">
-              <h2 class="profile-section-title">Community</h2>
-              <a href="#" class="profile-link">
-                <i class="ri-whatsapp-line"></i>
-                <span>Join WhatsApp community</span>
-                <i class="ri-external-link-line"></i>
-              </a>
-              <a href="#" class="profile-link">
-                <i class="ri-information-line"></i>
-                <span>About D'voice</span>
-                <i class="ri-external-link-line"></i>
-              </a>
-            </div>
-
-            <!-- Destructive -->
+    
+            <!-- ===== 5. DESTRUCTIVE ===== -->
             <div class="profile-section profile-section-destructive">
               <button class="profile-delete-btn" id="profile-delete-btn">
                 Delete account
               </button>
             </div>
-
+    
           </div>
-
         </div>
-
       </div>
     </section>
 
@@ -486,6 +496,38 @@
       </button>
     </div>
   </nav>
+
+  <!-- ===== DELETE ACCOUNT SHEET ===== -->
+  <div class="sheet-overlay" id="delete-overlay">
+    <div class="sheet" id="delete-sheet" role="dialog" aria-modal="true" aria-labelledby="delete-sheet-title">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <div class="sheet-content">
+        <div class="delete-panel">
+          <h2 class="delete-title" id="delete-sheet-title">Delete your account?</h2>
+          <p class="delete-desc">
+            This removes your account, your saved resources and your library.
+            This can't be undone.
+          </p>
+  
+          <div class="form-field" style="margin-bottom:16px">
+            <label class="form-label" for="delete-confirm-input">
+              Type <strong id="delete-confirm-email"></strong> to confirm
+            </label>
+            <input class="form-input" type="email" id="delete-confirm-input" autocomplete="off" />
+          </div>
+  
+          <div class="cta-pair">
+            <button class="cta-primary" id="delete-confirm-btn" disabled>
+              Delete my account
+            </button>
+            <button class="cta-secondary" id="delete-cancel-btn" type="button">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   
     <!-- ===== SHEET OVERLAY ===== -->
   <div class="sheet-overlay" id="sheet-overlay">
