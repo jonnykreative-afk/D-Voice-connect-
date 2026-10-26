@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="/css/widgets/states.css">
   <link rel="stylesheet" href="/admin/css/shell.css">
   <link rel="stylesheet" href="/admin/css/faculty.css">
+  <link rel="stylesheet" href="/admin/css/overview.css">
+  <link rel="stylesheet" href="/admin/css/news.css">
+  <link rel="stylesheet" href="/admin/css/groups.css">
 </head>
 <body>
   <div class="admin-shell">
@@ -39,7 +42,7 @@
 
       <div class="sidebar-footer">
         <div class="operator-info">
-          <span class="operator-name">Imtiaz</span>
+          <span class="operator-name">Ifeoluwa</span>
           <span class="operator-role">Admin</span>
         </div>
         <a href="#" class="sidebar-link">View student app</a>
@@ -65,11 +68,7 @@
       <!-- View containers -->
       <main class="admin-content" id="admin-content">
         <section class="admin-view" id="view-overview" data-view="overview">
-          <div class="view-placeholder">
-            <div class="placeholder-icon">◈</div>
-            <h2>Overview</h2>
-            <p>Faculty health, recently changed, and quick actions will live here.</p>
-          </div>
+          <div id="overview-container"></div>
         </section>
 
         <section class="admin-view" id="view-faculty" data-view="faculty">
@@ -102,19 +101,17 @@
         </section>
 
         <section class="admin-view" id="view-news" data-view="news">
-          <div class="view-placeholder">
-            <div class="placeholder-icon">◈</div>
-            <h2>News</h2>
-            <p>News list and add/edit forms will live here.</p>
+          <div class="news-list-header">
+            <button class="btn btn-primary" id="add-news-btn">Add news item</button>
           </div>
+          <div id="news-list-container"></div>
         </section>
 
         <section class="admin-view" id="view-groups" data-view="groups">
-          <div class="view-placeholder">
-            <div class="placeholder-icon">◈</div>
-            <h2>Groups</h2>
-            <p>Indigenous groups list and forms will live here.</p>
+          <div class="groups-list-header">
+            <button class="btn btn-primary" id="add-group-btn">Add group</button>
           </div>
+          <div id="groups-list-container"></div>
         </section>
       </main>
     </div>

@@ -1,0 +1,17 @@
+/* ========== ADMIN NEWS ========== */
+
+.news-list-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.news-row .resource-row-secondary {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.news-image-indicator {
+  font-size: 12px;
+}

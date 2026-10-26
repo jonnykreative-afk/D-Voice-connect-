@@ -1,4 +1,8 @@
-import { initFaculty, handleFacultyRoute } from './faculty.js';
+import { initFaculty, handleFacultyRoute, enterIntentMode } from './faculty.js';
+import { initOverview, renderOverview } from './overview.js';
+import { initNews } from './news.js';
+import { initGroups } from './groups.js';
+import { initSheet } from '/js/utility/sheet.js'
 
 // admin-shell.js — D'voice Admin SPA shell
 // Persistent frame: sidebar, top bar, hash routing, view management.
@@ -63,10 +67,10 @@ navItems.forEach((item) => {
   });
 });
 
+// ---------- Routing ----------
 function parseHash() {
   const hash = window.location.hash.replace(/^#\//, '');
-  const root = hash.split('/')[0];
-  return ROUTES[root] ? root : DEFAULT_ROUTE;
+  return ROUTES[hash] ? hash : DEFAULT_ROUTE;
 }
 
 function setActiveView(route) {
@@ -102,6 +106,9 @@ function handleRoute() {
 window.addEventListener('hashchange', () => {
   handleRoute();
   handleFacultyRoute();
+  if (parseHash() === 'overview') {
+    renderOverview();
+  }
 });
 
 // ---------- Init ----------
@@ -112,12 +119,21 @@ function initShell() {
   }
   handleRoute();
   handleFacultyRoute();
+  if (parseHash() === 'overview') {
+    renderOverview();
+  }
 }
 
-// Initialize faculty surface
+// Initialize all surfaces
+initSheet();
 initFaculty();
-
+initOverview();
+initNews();
+initGroups();
 initShell();
+
+// Listen for intent mode from Overview
+window.addEventListener('admin:enter-intent-mode', enterIntentMode);
 
 // ---------- Public API ----------
 // Surfaces register their init functions here; the shell calls them once.
