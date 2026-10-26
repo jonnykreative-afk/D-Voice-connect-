@@ -1,3 +1,5 @@
+import { initFaculty, handleFacultyRoute } from './faculty.js';
+
 // admin-shell.js — D'voice Admin SPA shell
 // Persistent frame: sidebar, top bar, hash routing, view management.
 
@@ -97,7 +99,10 @@ function handleRoute() {
 }
 
 // Listen for hash changes
-window.addEventListener('hashchange', handleRoute);
+window.addEventListener('hashchange', () => {
+  handleRoute();
+  handleFacultyRoute();
+});
 
 // ---------- Init ----------
 function initShell() {
@@ -106,7 +111,11 @@ function initShell() {
     window.location.hash = `#/${DEFAULT_ROUTE}`;
   }
   handleRoute();
+  handleFacultyRoute();
 }
+
+// Initialize faculty surface
+initFaculty();
 
 initShell();
 

@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="/css/widgets/toast.css">
   <link rel="stylesheet" href="/css/widgets/states.css">
   <link rel="stylesheet" href="/admin/css/shell.css">
+  <link rel="stylesheet" href="/admin/css/faculty.css">
 </head>
 <body>
   <div class="admin-shell">
@@ -35,6 +36,15 @@
           <span class="nav-label">Groups</span>
         </a>
       </nav>
+
+      <div class="sidebar-footer">
+        <div class="operator-info">
+          <span class="operator-name">Imtiaz</span>
+          <span class="operator-role">Admin</span>
+        </div>
+        <a href="#" class="sidebar-link">View student app</a>
+        <button class="sidebar-link sidebar-signout" id="signout-btn">Sign out</button>
+      </div>
     </aside>
 
     <!-- Sidebar overlay (mobile) -->
@@ -63,10 +73,31 @@
         </section>
 
         <section class="admin-view" id="view-faculty" data-view="faculty">
-          <div class="view-placeholder">
-            <div class="placeholder-icon">◈</div>
-            <h2>Faculty</h2>
-            <p>Faculty list and detail workspace will live here.</p>
+          <!-- Level 1: Faculty list -->
+          <div id="faculty-list-view">
+            <div class="faculty-list-header">
+              <button class="btn btn-primary" id="create-faculty-btn">Create faculty</button>
+            </div>
+            <div id="faculty-list-container"></div>
+          </div>
+
+          <!-- Level 2: Faculty detail -->
+          <div id="faculty-detail-view" hidden>
+            <div class="faculty-detail-header">
+              <button class="back-btn" id="faculty-back-btn" aria-label="Back to faculty list">
+                <span>←</span> Back
+              </button>
+              <div class="faculty-title-row">
+                <h2 class="faculty-name" id="faculty-detail-name"></h2>
+                <span class="badge" id="faculty-detail-badge"></span>
+              </div>
+              <p class="faculty-meta" id="faculty-detail-meta"></p>
+            </div>
+            <div class="faculty-detail-actions">
+              <button class="btn btn-primary" id="add-resource-btn">Add resource</button>
+              <button class="btn btn-secondary" id="faculty-overflow-btn" aria-label="Faculty options">⋮</button>
+            </div>
+            <div id="faculty-resources-container"></div>
           </div>
         </section>
 
@@ -127,6 +158,6 @@
     <button class="toast-action" id="toast-action" hidden></button>
   </div>
 
-  <script type="module" src="./admin/js/shell.js"></script>
+  <script type="module" src="/admin/js/shell.js"></script>
 </body>
 </html>
