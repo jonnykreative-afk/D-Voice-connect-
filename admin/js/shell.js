@@ -63,10 +63,10 @@ navItems.forEach((item) => {
   });
 });
 
-// ---------- Routing ----------
 function parseHash() {
   const hash = window.location.hash.replace(/^#\//, '');
-  return ROUTES[hash] ? hash : DEFAULT_ROUTE;
+  const root = hash.split('/')[0];
+  return ROUTES[root] ? root : DEFAULT_ROUTE;
 }
 
 function setActiveView(route) {
