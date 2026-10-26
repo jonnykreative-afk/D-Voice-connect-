@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>D'voice Admin</title>
+  <link rel="stylesheet" href="/css/core.css">
+  <link rel="stylesheet" href="/css/widgets/sheet.css">
+  <link rel="stylesheet" href="/css/widgets/toast.css">
+  <link rel="stylesheet" href="/css/widgets/states.css">
+  <link rel="stylesheet" href="/admin/css/shell.css">
+</head>
+<body>
+  <div class="admin-shell">
+    <!-- Sidebar (desktop) / Drawer (mobile) -->
+    <aside class="admin-sidebar" id="admin-sidebar">
+      <div class="sidebar-header">
+        <h1 class="sidebar-title">D'voice Admin</h1>
+      </div>
+      <nav class="sidebar-nav" aria-label="Admin navigation">
+        <a href="#/overview" class="nav-item" data-route="overview">
+          <span class="nav-icon">◈</span>
+          <span class="nav-label">Overview</span>
+        </a>
+        <a href="#/faculty" class="nav-item" data-route="faculty">
+          <span class="nav-icon">◈</span>
+          <span class="nav-label">Faculty</span>
+        </a>
+        <a href="#/news" class="nav-item" data-route="news">
+          <span class="nav-icon">◈</span>
+          <span class="nav-label">News</span>
+        </a>
+        <a href="#/groups" class="nav-item" data-route="groups">
+          <span class="nav-icon">◈</span>
+          <span class="nav-label">Groups</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Sidebar overlay (mobile) -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Main content area -->
+    <div class="admin-main">
+      <!-- Top bar (mobile) / Header (desktop) -->
+      <header class="admin-topbar">
+        <button class="menu-trigger" id="menu-trigger" aria-label="Open menu" aria-expanded="false">
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+        </button>
+        <h2 class="topbar-title" id="topbar-title">Overview</h2>
+      </header>
+
+      <!-- View containers -->
+      <main class="admin-content" id="admin-content">
+        <section class="admin-view" id="view-overview" data-view="overview">
+          <div class="view-placeholder">
+            <div class="placeholder-icon">◈</div>
+            <h2>Overview</h2>
+            <p>Faculty health, recently changed, and quick actions will live here.</p>
+          </div>
+        </section>
+
+        <section class="admin-view" id="view-faculty" data-view="faculty">
+          <div class="view-placeholder">
+            <div class="placeholder-icon">◈</div>
+            <h2>Faculty</h2>
+            <p>Faculty list and detail workspace will live here.</p>
+          </div>
+        </section>
+
+        <section class="admin-view" id="view-news" data-view="news">
+          <div class="view-placeholder">
+            <div class="placeholder-icon">◈</div>
+            <h2>News</h2>
+            <p>News list and add/edit forms will live here.</p>
+          </div>
+        </section>
+
+        <section class="admin-view" id="view-groups" data-view="groups">
+          <div class="view-placeholder">
+            <div class="placeholder-icon">◈</div>
+            <h2>Groups</h2>
+            <p>Indigenous groups list and forms will live here.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Sheet overlay (shared) -->
+  <div class="sheet-overlay" id="sheet-overlay">
+    <div class="sheet" role="dialog" aria-modal="true">
+      <div class="sheet-handle" id="sheet-handle"></div>
+      <div class="sheet-content" data-state="sheet-content">
+        <div class="state-loading" hidden>
+          <div class="skeleton skeleton-title"></div>
+          <div class="skeleton skeleton-course"></div>
+          <div class="skeleton skeleton-line"></div>
+          <div class="skeleton skeleton-line"></div>
+          <div class="skeleton skeleton-line short"></div>
+        </div>
+        <div class="state-empty" hidden>
+          <div class="placeholder">
+            <i>◈</i>
+            <h2>Nothing here</h2>
+            <p>No content to display.</p>
+          </div>
+        </div>
+        <div class="state-error" hidden>
+          <div class="placeholder">
+            <i>⚠</i>
+            <h2>Something went wrong</h2>
+            <p>Please try again.</p>
+          </div>
+        </div>
+        <div class="state-data" hidden></div>
+      </div>
+      <div class="sheet-actions" id="sheet-actions" hidden></div>
+    </div>
+  </div>
+
+  <!-- Toast (shared) -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span id="toast-message"></span>
+    <button class="toast-action" id="toast-action" hidden></button>
+  </div>
+
+  <script type="module" src="./admin/js/shell.js"></script>
+</body>
+</html>
